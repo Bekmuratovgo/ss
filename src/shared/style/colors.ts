@@ -1,0 +1,16 @@
+export const colors = {
+  black: "#000000",
+  board: "#1C1C1C",
+  white: "#FFFFFF",
+  primary: "#FFE922",
+  field: "#232323",
+  stroke: "#B7B7B7",
+  background: "#191919",
+  line: "#4A4A4A",
+  opacity: "#92AAB9",
+  gray: "#262626",
+  secondary: "#00C24D",
+  error: "#FF4B32",
+  green: "#00C24D",
+  transparent: "transparent",
+};

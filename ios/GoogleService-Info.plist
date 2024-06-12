@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyD-5Z5WdEJiz4N5P0TAeqKlPJU_I6aF5t8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>504050305075</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.grigor.ygclient</string>
+	<key>PROJECT_ID</key>
+	<string>taxicrimea-df3f1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>taxicrimea-df3f1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:504050305075:ios:a3bd43fecb03e073873b46</string>
+</dict>
+</plist>

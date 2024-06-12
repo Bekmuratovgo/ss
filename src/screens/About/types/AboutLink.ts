@@ -1,0 +1,1 @@
+export type AboutLink = { label: string, link: string };

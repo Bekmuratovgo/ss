@@ -1,0 +1,25 @@
+{
+    "project_info": {
+        "project_number": "504050305075",
+        "project_id": "taxicrimea-df3f1",
+        "storage_bucket": "taxicrimea-df3f1.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:504050305075:android:1b0d543d2e54e6d6873b46",
+            "android_client_info": {
+                "package_name": "com.grigor.ygclient"
+            }
+        },
+        "oauth_client": [],
+        "api_key": [{
+            "current_key": "AIzaSyBFxHlbGxpzCHoa1tDLgwoy75Fn1riocwk"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": []
+            }
+        }
+    }],
+    "configuration_version": "1"
+}

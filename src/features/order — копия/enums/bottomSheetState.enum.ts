@@ -1,0 +1,17 @@
+export enum BottomSheetStateEnum {
+    ENABLE_GPS = 'enable_gps',
+    DEFINED_PAYMENT_METHOD = 'define_payment_method',
+    SET_ADDRESS = 'set_address',
+    SET_DEPARTURE_LOCATION = 'set_departure_location',
+    SET_DEPARTURE_CITY = 'set_departure_city',
+    SET_DEPARTURE_ADDRESS = 'set_departure_address',
+    SET_ARRIVAL_LOCATION = 'set_arrival_location',
+    SET_ARRIVAL_CITY = 'set_arrival_city',
+    SET_ARRIVAL_CITY_ADDITIONAL = 'set_arrival_city_additional',
+    SET_ARRIVAL_ADDRESS = 'set_arrival_address',
+    SET_ARRIVAL_ADDRESS_ADDITIONAL = 'set_arrival_address_additional',
+    ORDER_PROCESS = 'order_process',
+    ORDER_DETAIL = 'order_detail',
+    ORDER_FINISHED = 'order_finished',
+    LOADING = 'loading',
+}
