@@ -1,9 +1,19 @@
-import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from "react-native"
 import { colors, fonts } from "src/shared/style";
 import { TBottomSheetMethods } from "../types/bottomSheetMethods";
 import { FC, useEffect, useRef, useState } from "react";
 import { CrossIcon } from "src/shared/img";
-import { BottomSheetFlatList, BottomSheetModal, BottomSheetTextInput, useBottomSheet } from "@gorhom/bottom-sheet";
+import { BottomSheetFlatList, BottomSheetModal, useBottomSheet } from "@gorhom/bottom-sheet";
 import { Button } from "src/shared/components/Button";
 import { BottomSheetStateEnum } from "../enums/bottomSheetState.enum";
 import { getAddress, getCities } from "../model/order-actions";
@@ -36,7 +46,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
     useEffect(() => {
         const points = BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.SET_ARRIVAL_ADDRESS_ADDITIONAL];
         let snapPoint = points[0];
-    
+
        if (isKeyboardVisible && foundCities.length > 0) {
             snapPoint = '75%';
         } else if (isKeyboardVisible) {
@@ -44,7 +54,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
         } else if (foundCities.length > 0) {
             snapPoint = '45%';
         }
-    
+
         snapToPosition(snapPoint);
         handleSetSnapPoints(points);
         setSnapPos(snapPoint);
@@ -55,7 +65,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
           () => {
-            setKeyboardVisible(true); 
+            setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
@@ -64,7 +74,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
             setKeyboardVisible(false);
           }
         );
-    
+
         return () => {
           keyboardDidHideListener.remove();
           keyboardDidShowListener.remove();
@@ -96,12 +106,12 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
         const additionalArrivals = order.additionalArrivals?.slice() || [];
         const arrival = additionalArrivals[index];
         arrival.address = selectedAddress;
-
+      console.log('setDeparture 19')
         handleSetOrder({...order, additionalArrivals });
         setBottomSheetState(BottomSheetStateEnum.SET_ARRIVAL_LOCATION);
     }
 
-    
+
     /**
      * Fetching cities from yandex
      */
@@ -115,14 +125,14 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
 
         const searchQuery = arrival.city ? `${arrival.city},${search}` : search;
 
-        
+
         getAddress(searchQuery).then((res: any) => {
             setFoundCities(res.results.map((item) => item.title.text));
         }).catch(err => {
             console.error(err);
         });
     }
-    
+
 
     /**
      * Bounced fetching cities
@@ -142,7 +152,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
                 <View style={styles.container_header}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={close}
                         style={styles.close_button}>
                             <CrossIcon />
@@ -150,9 +160,9 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
                     <Text style={[fonts.medium, styles.header_title]}>Введите адрес</Text>
                 </View>
                 <View style={styles.body}>
-                    <BottomSheetTextInput 
-                            style={styles.input} 
-                            value={search} 
+                    <TextInput
+                            style={styles.input}
+                            value={search}
                             autoFocus
                             onChangeText={handleChangeSearch}/>
                 </View>
@@ -163,14 +173,14 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
                     keyExtractor={(address) => `${address}`}
                     style={styles.dropdown}
                     renderItem={({item, index}) => (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                                 onPress={() => handleSelectAddress(item)}
                                 style={index === 0 ? styles.dropdown_item_first : styles.dropdown_item}>
                                     <Text style={[fonts.regular, styles.dropdown_item_text]}>{item}</Text>
                         </TouchableOpacity>
                     )}/>
                 }
-          
+
             </View>
         </TouchableWithoutFeedback>
         </KeyboardAvoidingView>

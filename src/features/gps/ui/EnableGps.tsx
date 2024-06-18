@@ -60,6 +60,8 @@ export const EnableGps: FC<Props> = memo(({ setBottomSheetState }) => {
                             lat: latitude,
                             lon: longitude,
                         });
+                      // TODO: setDeparture 2
+                      console.log('setDeparture 2')
                         handleSetOrder({
                             ...order,
                             departure: {

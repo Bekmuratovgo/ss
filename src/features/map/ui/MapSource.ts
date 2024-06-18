@@ -11,7 +11,7 @@ module.exports = `<!DOCTYPE html>
         
         .map-holder {
             width: 100%;
-            height: 100vh;
+            height: 60vh;
             border: 1px solid #000;
         }
     </style>
@@ -38,14 +38,24 @@ module.exports = `<!DOCTYPE html>
         let stopMarkers = [];
 
         function init() {
-            myMap = new ymaps.Map("map", {
-                center: [55.861479, 37.428102],
-                zoom: 9,
+            myMap = new ymaps.Map('map', {
+                center: [55.861479, 37.628102],
+                zoom: 12,
                 controls: []
             },{
                 yandexMapDisablePoiInteractivity: true
             });
             window.ReactNativeWebView.postMessage(\`map:init\`);   
+        }
+        
+        function setMapHeight(height) {
+         const mapElement = document.querySelector('.map-holder');
+         
+         mapElement.style.height = height + 'px';
+         
+         if (myMap) {
+              myMap.container.fitToViewport();
+          }
         }
 
         function removeStartMarker() {
@@ -108,7 +118,7 @@ module.exports = `<!DOCTYPE html>
 
         function setMyPosition() {
             if (myLocation !== null) {
-                myMap.setCenter(myLocation, 5, {
+                myMap.setCenter(myLocation, 12, {
                     checkZoomRange: true
                 });
             }
@@ -131,9 +141,9 @@ module.exports = `<!DOCTYPE html>
 
         function removeMarkerInMap() {
             fitMarkers();
-            removeStopMarkersAll()
-            removeStopMarkers()
-            renderStopMarkers()
+            removeStopMarkersAll();
+            removeStopMarkers();
+            renderStopMarkers();
         }
         function removeStopMarkersAll() {
             stopMarkers.forEach(marker => {
@@ -158,7 +168,7 @@ module.exports = `<!DOCTYPE html>
                     preset: 'islands#blueCircleDotIcon'
                 });
                 return {lat: item.lat, lon: item.lon, marker};
-            })
+            });
         };
 
         function fitMarkers() {
@@ -173,13 +183,13 @@ module.exports = `<!DOCTYPE html>
                 });
             } else if (startMarkerLocation !== null) {
                 window.ReactNativeWebView.postMessage(\`Setting start: \${startMarkerLocation}\`);
-                myMap.setCenter(startMarkerLocation, 15, {
+                myMap.setCenter(startMarkerLocation, 12, {
                     checkZoomRange: false
                 });
 
             } else if (endMarkerLocation !== null) {
                 window.ReactNativeWebView.postMessage(\`Setting end: \${endMarkerLocation}\`);
-                myMap.setCenter(endMarkerLocation, 15, {
+                myMap.setCenter(endMarkerLocation, 12, {
                     checkZoomRange: false
                 });
             };
@@ -209,17 +219,17 @@ module.exports = `<!DOCTYPE html>
             }
 
 
-            const tempFilterStops =  additionalStops.filter((item) => Boolean(item?.lat) && Boolean(item?.lon))
+            const tempFilterStops =  additionalStops.filter((item) => Boolean(item?.lat) && Boolean(item?.lon));
 
-            const tempStops = [startMarkerLocation]
+            const tempStops = [startMarkerLocation];
             
             for(const item of tempFilterStops ){ 
-                tempStops.push([item.lat,item.lon])
+                tempStops.push([item.lat,item.lon]);
             }
-            tempStops.push(endMarkerLocation)
+            tempStops.push(endMarkerLocation);
             startMarkerLocation.forEach((item) => {
                 window.ReactNativeWebView.postMessage(\`startMarkerLocation:\${JSON.stringify(item)}\`);
-            })
+            });
     
             multiRoute = new ymaps.multiRouter.MultiRoute({
                 // Описание опорных точек мультимаршрута.
@@ -236,11 +246,11 @@ module.exports = `<!DOCTYPE html>
                 boundsAutoApply: true
             });
             myMap.geoObjects.add(multiRoute);
-            multiRoute.model.events.add("requestsuccess", function() {
+            multiRoute.model.events.add('requestsuccess', function() {
                 const activeRoute = multiRoute.getActiveRoute();
-                window.ReactNativeWebView.postMessage(\`distance:\${activeRoute.properties.get("distance").text}\`);
-                window.ReactNativeWebView.postMessage(\`time:\${activeRoute.properties.get("duration").text}\`);
-            })
+                window.ReactNativeWebView.postMessage(\`distance:\${activeRoute.properties.get('distance').text}\`);
+                window.ReactNativeWebView.postMessage(\`time:\${activeRoute.properties.get('duration').text}\`);
+            });
         };
 
         function removeAllMarkers() {
@@ -265,5 +275,4 @@ module.exports = `<!DOCTYPE html>
         }
     </script>
 </body>
-
 </html>`

@@ -24,6 +24,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
     const [comment, setComment] = useState<string>(order.comment);
 
     const handleApplyChanges = () => {
+      console.log('setDeparture 3')
         handleSetOrder({...order, baggage, passangersAmount, params, comment});
         handleSetOrderDetailsModal(false);
         setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
@@ -40,19 +41,19 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     useEffect(() => {
         const points = BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.ORDER_DETAIL];
-       
+
 
                     snapToPosition(points[0]);
                     handleSetSnapPoints(points);
                     setSnapPos(points[0]);
-                    
-       
+
+
     }, []);
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
           () => {
-            setKeyboardVisible(true); 
+            setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
@@ -61,7 +62,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
             setKeyboardVisible(false);
           }
         );
-    
+
         return () => {
           keyboardDidHideListener.remove();
           keyboardDidShowListener.remove();
@@ -78,7 +79,7 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
       >
         <SafeAreaView style={styles.layout}>
             <View style={styles.header}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.close_holder}
                     onPress={() => close()}>
                         <CrossIcon />
@@ -88,14 +89,14 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <View style={styles.content}>
                     <View style={styles.body}>
-                        <Input 
-                            placeholder="Багаж" 
+                        <Input
+                            placeholder="Багаж"
                             value={baggage}
                             onChange={setBaggage}
                             keyboardType="numeric"
                             leftIcon={<BaggageIcon />}/>
-                        <Input 
-                            placeholder="Количество человек" 
+                        <Input
+                            placeholder="Количество человек"
                             value={passangersAmount}
                             onChange={setPassangersAmount}
                             keyboardType="numeric"
@@ -104,9 +105,9 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
 
                         <View style={styles.option_holder}>
                             <TouchableOpacity style={styles.option_button} onPress={(e) => setParams(prev => ({...prev, babyChair: !prev.babyChair}))}>
-                                
+
                                 <Checkbox
-                                    value={params.babyChair}   
+                                    value={params.babyChair}
                                     style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }], marginTop : 5 }}
 
                                     onValueChange={() => Platform.OS !== "ios" && setParams(prev => ({...prev, babyChair: !prev.babyChair}))}
@@ -143,21 +144,21 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
                                     tintColors={{ true: colors.white, false: colors.white }}
 
                                     tintColor={colors.white}
-                                    
+
                                     onCheckColor={colors.white}
                                     onTintColor={colors.white}
                                     />
                                 <Text style={styles.option_text}>Перевозка животных</Text>
                             </TouchableOpacity>
                         </View>
-                        <Input 
+                        <Input
                             placeholder="Пожелания к заказу"
-                            value={comment} 
-                            onChange={setComment} 
+                            value={comment}
+                            onChange={setComment}
                             textAlignVertical="top"
-                            multiline 
+                            multiline
                             numberOfLines={3}/>
-                     
+
                     </View>
                     <View style={styles.button_holder}>
                         <Button onPress={handleApplyChanges} projectType="primary">
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         flexDirection: 'column',
         rowGap: 10
-        
+
     },
     option_holder: {
         flexDirection: 'row',
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
         paddingBottom : 10,
         borderBottomWidth: 1,
         borderBottomColor: colors.line
-  
+
     },
     option_holder_border: {
         marginVertical: 10,
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
 
     },
     option_button: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         alignItems: 'center',
         columnGap: Platform.OS === "ios" ? 10 : 0
     },

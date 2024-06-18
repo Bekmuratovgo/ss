@@ -21,6 +21,7 @@ export const PaymentMethod: React.FC<IPaymentMethodProps> = ({setBottomSheetStat
     const handleSetBottomSheetstate = useUnit(setBottomSheetState);
 
     const handleSelectMethod = (method: PaymentMethodEnum) => {
+      console.log('setDeparture 4')
         handleSetOrder({...order, paymentMethod: method});
         setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
     }
@@ -31,10 +32,10 @@ export const PaymentMethod: React.FC<IPaymentMethodProps> = ({setBottomSheetStat
     return (
         <View style={styles.container}>
             <View>
-      
+
             <Text style={[fonts.medium, styles.header_title]}>Способ оплаты</Text>
             </View>
-          
+
             <View style={styles.methods_holder}>
                 {
                     Object.keys(PAYMENT_METHODS).map((key: string, index) => {

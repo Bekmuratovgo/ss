@@ -15,7 +15,7 @@ import { Profile } from "src/types/profile";
 import { getProfile, setProfile } from "src/features/profile";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AsyncStorageKeys } from "src/app/types/authorization";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 import Geolocation from "@react-native-community/geolocation";
 import { setGpsEnabled } from "src/features/gps";
@@ -40,6 +40,7 @@ const Order = function ({ navigation }) {
         handleSetOrder,
         handleSetEditingOrder,
     ] = useUnit([$main, setOrder, setEditingOrder]);
+  const [bottomSheetState, setBottomSheetState] = useState<BottomSheetStateEnum>(BottomSheetStateEnum.LOADING);
 
     const handleSetProfile = useEvent(setProfile);
 
@@ -51,7 +52,6 @@ const Order = function ({ navigation }) {
         }
         try {
             const profile: Profile = await getProfile();
-            console.log("Profile: ", profile);
             handleSetProfile(profile);
         } catch (err) {
             return navigation.navigate("Auth");
@@ -84,16 +84,15 @@ const Order = function ({ navigation }) {
                             data.address.village ||
                             data.address.hamlet;
                         const address = data.display_name;
-                        console.log("Город:", city);
-                        console.log("Адрес:", address);
-
+                        // TODO: setDeparture 1
+                      console.log('setDeparture 1')
                         handleSetOrder({
                             ...order,
                             departure: {
-                                city: city,
-                                address: address,
-                                lat: latitude,
-                                lot: longitude,
+                              city: city,
+                              address: address,
+                              lat: latitude,
+                              lot: longitude,
                             },
                         });
                         handleSetEditingOrder({
@@ -119,6 +118,7 @@ const Order = function ({ navigation }) {
     useEffect(() => {
         handleCheckGeolocation();
     }, []);
+
     return (
         <View style={styles.layout}>
             <View
@@ -139,8 +139,8 @@ const Order = function ({ navigation }) {
             </View>
             <>
                 <OrderStatusBarBackground />
-                <Map />
-                <OrderBottomSheet />
+                <Map bottomSheetState={bottomSheetState} />
+                <OrderBottomSheet bottomSheetState={bottomSheetState} setBottomSheetState={setBottomSheetState} />
             </>
         </View>
     );

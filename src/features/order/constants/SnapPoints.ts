@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import {Dimensions, Platform} from "react-native";
 import { BottomSheetStateEnum } from "../enums/bottomSheetState.enum";
 
 export let BOTTOM_SHEET_SNAP_POINTS = {
@@ -17,6 +17,33 @@ export let BOTTOM_SHEET_SNAP_POINTS = {
     [BottomSheetStateEnum.SET_ARRIVAL_ADDRESS_ADDITIONAL]: Platform.OS === "ios" ?  ['20%'] : ['25%'],
     [BottomSheetStateEnum.ORDER_PROCESS]: Platform.OS === "ios" ? [215] : [225],
     [BottomSheetStateEnum.ORDER_FINISHED]: Platform.OS === "ios" ? [440] : [450]
+}
+
+export function getBottomSheetOffset(stateEnum: BottomSheetStateEnum) {
+  const deviceHeight = Dimensions.get("window").height;
+  const snapPoints = BOTTOM_SHEET_SNAP_POINTS[stateEnum];
+
+  if (!snapPoints || snapPoints.length === 0) {
+    return 0;
+  }
+
+  let minPoint = Infinity;
+
+  snapPoints.forEach(point => {
+    if (typeof point === 'string' && point.endsWith('%')) {
+      const percentageValue = parseFloat(point);
+      const pixelValue = (percentageValue / 100) * deviceHeight;
+      if (pixelValue < minPoint) {
+        minPoint = pixelValue;
+      }
+    } else if (typeof point === 'number') {
+      if (point < minPoint) {
+        minPoint = point;
+      }
+    }
+  });
+
+  return (deviceHeight - minPoint) + 80;
 }
 
 export const getBottomSheetSnapPoints = () => BOTTOM_SHEET_SNAP_POINTS;

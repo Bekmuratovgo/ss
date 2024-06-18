@@ -75,7 +75,7 @@ export const Auth: FC<IAuthProps> = ({ navigation }) => {
             setPrivacyState("closed");
         }
     }, [authState]);
-    
+
     useEffect(() => {
         console.log('Resetting');
         handleResetOrder();
@@ -83,19 +83,19 @@ export const Auth: FC<IAuthProps> = ({ navigation }) => {
     }, []);
 
     const authComponents = {
-        [AuthStateEnum.MENU]: <AuthMenu 
+        [AuthStateEnum.MENU]: <AuthMenu
             onSignin={handleSignin}
             onSignup={handleSignup}
             onPrivacyPolicy={() => setPrivacyState("read")}/>,
-        [AuthStateEnum.REQUEST_CODE]: <RequestCode 
-            type={authState.type} 
+        [AuthStateEnum.REQUEST_CODE]: <RequestCode
+            type={authState.type}
             phone={credentials.phone}
-            onVerifyCode={() => setAuthState(prev => ({...prev, state: AuthStateEnum.VERIFY_CODE}))} 
+            onVerifyCode={() => setAuthState(prev => ({...prev, state: AuthStateEnum.VERIFY_CODE}))}
             onBack={() => setAuthState(prev => ({...prev, state: AuthStateEnum.MENU}))}
             onPhoneChange={handleChangePhone}/>,
-        [AuthStateEnum.VERIFY_CODE]: <VerifyCode 
+        [AuthStateEnum.VERIFY_CODE]: <VerifyCode
             credentials={credentials}
-            onBack={() => setAuthState(prev => ({...prev, state: AuthStateEnum.REQUEST_CODE}))} 
+            onBack={() => setAuthState(prev => ({...prev, state: AuthStateEnum.REQUEST_CODE}))}
             onSuccessVerify={handleAuthorize}
             onCodeChange={handleChangeCode}/>,
     }

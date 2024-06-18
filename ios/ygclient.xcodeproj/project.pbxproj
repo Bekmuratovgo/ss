@@ -547,7 +547,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_TEAM = ZDYL24CW29;
+				DEVELOPMENT_TEAM = 5VRZ68G4M3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ygclient/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ygclient;
@@ -580,7 +580,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_TEAM = ZDYL24CW29;
+				DEVELOPMENT_TEAM = 5VRZ68G4M3;
 				INFOPLIST_FILE = ygclient/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ygclient;
 				LD_RUNPATH_SEARCH_PATHS = (

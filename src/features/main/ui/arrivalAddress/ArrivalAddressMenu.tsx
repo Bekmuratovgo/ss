@@ -17,22 +17,23 @@ export const ArriveAddressMenu: React.FC<IArriveAddressMenu> = ({  }) => {
     const [{ order, editingOrder }, handleSetOrder, handleSetEditingOrder] = useUnit([$main, setOrder, setEditingOrder]);
 
     const handleApply = () => {
-        handleSetOrder({...order, arrival: editingOrder.arrival});
+        console.log('setDeparture 7')
         handleSetBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
+        handleSetOrder({...order, arrival: editingOrder.arrival});
     }
     const handleClose = () => {
-        handleSetEditingOrder({...editingOrder, arrival: order.arrival});
         handleSetBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
+        handleSetEditingOrder({...editingOrder, arrival: order.arrival});
     }
 
-    
+
     useEffect(() => {
         snapToIndex(0);
     }, []);
     return(
         <View style={styles.container}>
             <View style={styles.container_header}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={handleClose}
                     style={styles.close_button}>
                         <CrossIcon />
@@ -42,14 +43,14 @@ export const ArriveAddressMenu: React.FC<IArriveAddressMenu> = ({  }) => {
             <View style={styles.container_body}>
                 <Button onPress={() => handleSetBottomSheetState(BottomSheetStateEnum.SET_ARRIVAL_CITY)} projectType="address_input">
                     <BuildingIcon width={25}/>
-                    <Text 
+                    <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={[fonts.regular, styles.button_text]}>{editingOrder.arrival.city || "Выберите город"}</Text>
                 </Button>
                 <Button onPress={() => handleSetBottomSheetState(BottomSheetStateEnum.SET_ARRIVAL_ADDRESS)} projectType="address_input">
                     <LocationMarkIcon width={25}/>
-                    <Text 
+                    <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={[fonts.regular, styles.button_text]}>{editingOrder.arrival.address || "Адрес"}</Text>

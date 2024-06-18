@@ -1,9 +1,19 @@
-import { Keyboard, KeyboardAvoidingView, Platform, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from "react-native"
 import { colors, fonts } from "src/shared/style";
 import { TBottomSheetMethods } from "../types/bottomSheetMethods";
 import { FC, useEffect, useRef, useState } from "react";
 import { CrossIcon } from "src/shared/img";
-import { BottomSheetFlatList, BottomSheetModal, BottomSheetTextInput, useBottomSheet } from "@gorhom/bottom-sheet";
+import { BottomSheetFlatList, BottomSheetModal, useBottomSheet } from "@gorhom/bottom-sheet";
 import { Button } from "src/shared/components/Button";
 import { BottomSheetStateEnum } from "../enums/bottomSheetState.enum";
 import { getCities } from "../model/order-actions";
@@ -33,7 +43,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
     useEffect(() => {
         const points = BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.SET_ARRIVAL_CITY];
         let snapPoint = points[0];
-    
+
        if (isKeyboardVisible && foundCities.length > 0) {
             snapPoint = '75%';
         } else if (isKeyboardVisible) {
@@ -41,7 +51,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
         } else if (foundCities.length > 0) {
             snapPoint = '45%';
         }
-    
+
         snapToPosition(snapPoint);
         handleSetSnapPoints(points);
         setSnapPos(snapPoint);
@@ -52,7 +62,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
           () => {
-            setKeyboardVisible(true); 
+            setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
@@ -61,7 +71,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
             setKeyboardVisible(false);
           }
         );
-    
+
         return () => {
           keyboardDidHideListener.remove();
           keyboardDidShowListener.remove();
@@ -127,7 +137,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
                 <View style={styles.container_header}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={close}
                         style={styles.close_button}>
                             <CrossIcon />
@@ -135,9 +145,9 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
                     <Text style={[fonts.medium, styles.header_title]}>Введите город</Text>
                 </View>
                 <View style={styles.body}>
-                    <BottomSheetTextInput 
-                            style={styles.input} 
-                            value={search} 
+                    <TextInput
+                            style={styles.input}
+                            value={search}
                             autoFocus
                             onChangeText={handleChangeSearch}/>
                 </View>
@@ -148,14 +158,14 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
                     keyExtractor={(city) => `${city}`}
                     style={styles.dropdown}
                     renderItem={({item, index}) => (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                                 onPress={() => handleSelectCity(item)}
                                 style={index === 0 ? styles.dropdown_item_first : styles.dropdown_item}>
                                     <Text style={[fonts.regular, styles.dropdown_item_text]}>{item}</Text>
                         </TouchableOpacity>
                     )}/>
                 }
-             
+
             </View>
         </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
@@ -166,7 +176,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
+
     },
     container_header: {
         position: 'relative'

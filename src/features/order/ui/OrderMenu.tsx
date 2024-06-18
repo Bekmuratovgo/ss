@@ -162,6 +162,7 @@ const OrderMenu: FC<Props> = function ({ setBottomSheetState }) {
     }
 
     function selectCarClass(index: number) {
+      console.log('setDeparture 15')
         handleSetOrder({ ...order, carClass: index });
     }
 
@@ -173,6 +174,7 @@ const OrderMenu: FC<Props> = function ({ setBottomSheetState }) {
     // Confirm date picker
     function handleConformDatepicker(date: Date) {
         setIsDatePickerOpen(false);
+      console.log('setDeparture 16')
         handleSetOrder({ ...order, date });
     }
 
@@ -307,7 +309,7 @@ const OrderMenu: FC<Props> = function ({ setBottomSheetState }) {
             return;
         }
         setIsLoading(true);
-
+      console.log('setDeparture 17')
         handleSetOrder({ ...order, distance: distance, price: price });
 
         const newOrder: CreateOrderDto = {
@@ -438,6 +440,7 @@ const OrderMenu: FC<Props> = function ({ setBottomSheetState }) {
                             <TouchableOpacity
                                 onPress={(e) => {
                                     e.stopPropagation();
+                                  console.log('setDeparture 18')
                                     handleSetOrder({
                                         ...order,
                                         arrival: { city: "", address: "" },

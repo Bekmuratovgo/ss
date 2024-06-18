@@ -16,8 +16,9 @@ export const DepartureAddressMenu: React.FC<IDepartureAddressMenu> = ({}) => {
     const { snapToIndex } = useBottomSheet();
     const [handleSetBottomSheetState] = useUnit([setBottomSheetState]);
     const [{order, editingOrder}, handleSetOrder, handleSetEditingOrder] = useUnit([$main, setOrder, setEditingOrder]);
-    
+
     const handleApply = () => {
+      console.log('setDeparture 8')
         handleSetOrder({...order, departure: editingOrder.departure});
         handleSetBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
     }
@@ -25,15 +26,15 @@ export const DepartureAddressMenu: React.FC<IDepartureAddressMenu> = ({}) => {
         handleSetEditingOrder({...editingOrder, departure: order.departure});
         handleSetBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
     }
-    
+
     useEffect(() => {
         snapToIndex(0);
     }, []);
-    
+
     return(
         <View style={styles.container}>
             <View style={styles.container_header}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={handleClose}
                     style={styles.close_button}>
                         <CrossIcon />
@@ -43,14 +44,14 @@ export const DepartureAddressMenu: React.FC<IDepartureAddressMenu> = ({}) => {
             <View style={styles.container_body}>
                 <Button onPress={() => handleSetBottomSheetState(BottomSheetStateEnum.SET_DEPARTURE_CITY)} projectType="address_input">
                     <BuildingIcon width={25} height={20}/>
-                    <Text 
+                    <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={[fonts.regular, styles.button_text]}>{editingOrder.departure.city || "Выберите город"}</Text>
                 </Button>
                 <Button onPress={() => handleSetBottomSheetState(BottomSheetStateEnum.SET_DEPARTURE_ADDRESS)} projectType="address_input">
                     <LocationMarkIcon width={25} height={20}/>
-                    <Text 
+                    <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={[fonts.regular, styles.button_text]}>{editingOrder.departure.address || "Адрес"}</Text>

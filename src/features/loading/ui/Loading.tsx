@@ -1,4 +1,6 @@
-import LottieView from "lottie-react-native"
+// import LottieView from "lottie-react-native"
+import React from "react";
+import {ActivityIndicator} from "react-native";
 import { colors } from "src/shared/style";
 
 const colorFilters = [
@@ -26,12 +28,6 @@ const colorFilters = [
 ]
 
 export const Loading = () => {
-    return (
-        <LottieView 
-            source={require('../constants/loadingAnimation.json')} 
-            autoPlay 
-            loop 
-            colorFilters={colorFilters}
-            style={{height: 250, width: 350}}/>
+    return (<ActivityIndicator/>
     );
 };

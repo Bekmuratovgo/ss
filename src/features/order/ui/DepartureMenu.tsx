@@ -31,12 +31,13 @@ const DepartureMenu: FC<Props> = function({ setBottomSheetState }) {
     }, []);
 
     function applyLocation() {
+      console.log('setDeparture 14')
         handleSetOrder({...order, departure: editingOrder.departure});
         setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
     }
 
     /**
-     * 
+     *
      */
     function onClose() {
         handleSetEditingOrder({...editingOrder, departure: order.departure});
@@ -53,7 +54,7 @@ const DepartureMenu: FC<Props> = function({ setBottomSheetState }) {
     return(
         <View style={styles.container}>
             <View style={styles.container_header}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={onClose}
                     style={styles.close_button}>
                         <CrossIcon />
@@ -63,14 +64,14 @@ const DepartureMenu: FC<Props> = function({ setBottomSheetState }) {
             <View style={styles.container_body}>
                 <Button onPress={openCitySelection} projectType="address_input">
                     <BuildingIcon width={25}/>
-                    <Text 
+                    <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={[fonts.regular, styles.button_text]}>{editingOrder.departure.city || "Выберите город"}</Text>
                 </Button>
                 <Button onPress={openAddressSelection} projectType="address_input">
                     <LocationMarkIcon width={25}/>
-                    <Text 
+                    <Text
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         style={[fonts.regular, styles.button_text]}>{editingOrder.departure.address || "Адрес"}</Text>

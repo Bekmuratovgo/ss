@@ -1,12 +1,12 @@
 import {
-    Keyboard,
-    KeyboardAvoidingView,
-    Platform,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text, TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { TBottomSheetMethods } from "../types/bottomSheetMethods";
 import { FC, useEffect, useRef, useState } from "react";
@@ -170,7 +170,7 @@ const ArrivalAddress: FC<Props> = function ({ setBottomSheetState }) {
                         </Text>
                     </View>
                     <View style={styles.body}>
-                        <BottomSheetTextInput
+                        <TextInput
                             style={styles.input}
                             value={search}
                             autoFocus

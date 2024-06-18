@@ -17,7 +17,7 @@ import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSh
 import { BottomSheetModal, useBottomSheet } from "@gorhom/bottom-sheet";
 import { setBottomSheetState, $bottomSheet } from 'src/features/main/model/BottomSheetStore';
 import { setSnapPoints } from "../model/bottomSheetStateStore";
-import { getGeocode } from "src/map/model/map-actions";
+import { getGeocode } from "src/features/map/model/map-actions";
 
 type Props = TBottomSheetMethods & {};
 
@@ -61,7 +61,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
     const handleSheetChange = useCallback((index) => {
         console.log("handleSheetChange", index);
       }, []);
-    
+
     const handleSnapPress = useCallback((index) => {
         sheetModalRef.current?.snapToIndex(index);
       }, []);
@@ -69,19 +69,20 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
     async function applyLocation() {
 
         try {
+          console.log('setDeparture 10')
             handleSetOrder({...order, newArrivals: [...order.additionalArrivals]});
             let stopsArr: any = [...order.additionalArrivals];
             for (let i = 0; i < stopsArr.length; i++){
                 if (stopsArr[i].city !== '' && stopsArr[i].address !== '') {
                     const res: any = await getGeocode(`${stopsArr[i].city},${stopsArr[i].address}`);
-                    
+
                     const points = res.response?.GeoObjectCollection?.featureMember[0]?.GeoObject?.Point?.pos;
                     if (points) {
                         const lat = parseFloat(points.split(' ')[1]);
                         const lon = parseFloat(points.split(' ')[0]);
-        
+
                         const additionalArrivals = order.additionalArrivals?.slice() || [];
-    
+
                         additionalArrivals[index] = {
                             ...additionalArrivals[index],
                             lat: lat,
@@ -95,6 +96,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
                     }
                 }
             }
+          console.log('setDeparture 11')
             handleSetOrder({ ...order, arrival: editingOrder.arrival, additionalArrivals: [...stopsArr], newArrivals: [] });
         } catch(err) {
             console.error('Failed to get geocode of additional arrival address: ', err)
@@ -102,11 +104,12 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
             sheetModalRef.current?.snapToPosition(Platform.OS === "ios" ? 653 : 623);
             setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
         }
-        
+
     }
 
     function onClose() {
         handleSetEditingOrder({ ...editingOrder, arrival: order.arrival });
+      console.log('setDeparture 12')
         handleSetOrder({...order, newArrivals: []});
         setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
     }
@@ -119,6 +122,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
         setBottomSheetState(BottomSheetStateEnum.SET_ARRIVAL_ADDRESS);
     }
     function openCitySelectionAdditional(index: number) {
+      console.log('setDeparture 13')
         handleSetOrder({ ...order, index: index  });
         setBottomSheetState(BottomSheetStateEnum.SET_ARRIVAL_CITY_ADDITIONAL);
     }
@@ -140,7 +144,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
             }
              const additionalArrivals = order?.additionalArrivals?.slice() || [];
              additionalArrivals.push(arrival);
-    
+
             handleSetOrder({...order, additionalArrivals,  index: index + 1});
         }
 
@@ -157,7 +161,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
 
     }
 
-    
+
 
 
     return (
@@ -250,7 +254,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
                         Добавить остановку
                     </Text>
                     </TouchableOpacity>
-                
+
                 )}
             </View>
             <View style={styles.buttons_holder}>

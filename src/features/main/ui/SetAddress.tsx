@@ -42,7 +42,7 @@ export const SetAddress: React.FC<ISetAddress> = ({
         }
         return order.arrival.city + ', ' + order.arrival.address;
     }, [order.arrival]);
-    
+
     // Open departure address menu sheet
     const handleOpenDepartureAddress = () => {
         setBottomSheetState(BottomSheetStateEnum.SET_DEPARTURE_LOCATION);
@@ -71,6 +71,7 @@ export const SetAddress: React.FC<ISetAddress> = ({
     // Confirm date picker
     const handleConformDatepicker = (date: Date) => {
         setDatePickerOpen(false);
+      console.log('setDeparture 5')
         handleSetOrder({...order, date});
     }
 
@@ -84,7 +85,7 @@ export const SetAddress: React.FC<ISetAddress> = ({
         if (!profile) {
             return;
         }
-        
+
         const newOrder: CreateOrderDto = {
             from: order.departure.city,
             to: order.arrival.city,
@@ -133,20 +134,21 @@ export const SetAddress: React.FC<ISetAddress> = ({
                 <View style={styles.address_holder}>
                     <Button onPress={handleOpenDepartureAddress} projectType="address_input">
                         <LocationMarkIcon />
-                        <Text 
+                        <Text
                             numberOfLines={1}
-                            style={[fonts.regular, styles.address_input_text]} 
+                            style={[fonts.regular, styles.address_input_text]}
                             ellipsizeMode="tail">{getDepartureAddressButton()}</Text>
                         <EditOptionsIcon />
                     </Button>
                     <Button onPress={handleOpenArrivalAddress} projectType="address_input">
                         <ArrowRightPrimaryIcon style={{ marginHorizontal: 8 }} />
-                        <Text 
+                        <Text
                             numberOfLines={1}
-                            style={[fonts.regular, styles.address_input_text]} 
+                            style={[fonts.regular, styles.address_input_text]}
                             ellipsizeMode="tail">{getArrivalAddressButton()}</Text>
                         <TouchableOpacity onPress={(e) => {
                             e.stopPropagation();
+                          console.log('setDeparture 6')
                             handleSetOrder({...order, arrival: { city: "", address: "" }})
                         }}>
                             <CrossIcon style={{ marginHorizontal: 7 }}/>
@@ -161,8 +163,8 @@ export const SetAddress: React.FC<ISetAddress> = ({
                         <ScrollView horizontal contentContainerStyle={styles.carClass_list}>
                             {
                                 CARS_CLASSES.map(({label, img}, index) => (
-                                    <TouchableOpacity 
-                                        key={index} 
+                                    <TouchableOpacity
+                                        key={index}
                                         onPress={() => handleSetOrder({...order, carClass: index})}
                                         style={[styles.carClass_item, index === carClass && styles.activeCarClass]}>
                                             <Image source={img} style={styles.carClass_img}/>
@@ -175,8 +177,8 @@ export const SetAddress: React.FC<ISetAddress> = ({
                         <BottomSheetScrollView horizontal contentContainerStyle={styles.carClass_list}>
                             {
                                 CARS_CLASSES.map(({label, img}, index) => (
-                                    <TouchableOpacity 
-                                        key={index} 
+                                    <TouchableOpacity
+                                        key={index}
                                         onPress={() => handleSetOrder({...order, carClass: index})}
                                         style={[styles.carClass_item, index === carClass && styles.activeCarClass]}>
                                             <Image source={img} style={styles.carClass_img}/>
@@ -190,7 +192,7 @@ export const SetAddress: React.FC<ISetAddress> = ({
             </View>
 
             <View style={styles.details}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.payment_block}
                     onPress={handleOpenPaymentSheet}>
                         <Text style={styles.payment_title}>Оплата</Text>
@@ -199,7 +201,7 @@ export const SetAddress: React.FC<ISetAddress> = ({
                             <Text style={[fonts.regular, styles.payment_text]}>{PAYMENT_METHODS[paymentMethod].label}</Text>
                         </View>
                 </TouchableOpacity>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.time_block}
                     onPress={handleOpenDatepicker}>
                         <Text style={styles.payment_title}>Время и дата</Text>
@@ -208,12 +210,12 @@ export const SetAddress: React.FC<ISetAddress> = ({
                             <Text style={[fonts.regular, styles.payment_text]}>{dayjs(shipDate).format('DD.MM.YYYY hh:mm')}</Text>
                         </View>
                 </TouchableOpacity>
-                <DatePicker 
+                <DatePicker
                     modal
                     mode="datetime"
                     locale="RU"
                     date={order.date}
-                    open={datePickerOpen} 
+                    open={datePickerOpen}
                     onConfirm={handleConformDatepicker}
                     onCancel={handleCloseDatepicker}
                     confirmText="Выбрать"
