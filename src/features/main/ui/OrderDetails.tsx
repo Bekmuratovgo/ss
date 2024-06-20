@@ -198,7 +198,6 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     content: {
-        flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-between',
         paddingHorizontal: 20

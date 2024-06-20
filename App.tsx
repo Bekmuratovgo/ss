@@ -21,12 +21,12 @@ LogBox.ignoreAllLogs();
 export const App = () => {
   const [{ profile }] = useUnit([$profile]);
   const [
-    { orderProcessStatus, status,order }, 
-    handleSetOrderProcessStatus, 
+    { orderProcessStatus, status,order },
+    handleSetOrderProcessStatus,
     handleSetBottomSheetState,
     handleSetFinishedOrder
 ] = useUnit([$main, setOrderProcessStatus,setStatus, setBottomSheetState, setFinishedOrder]);
-  
+
   const handleConnectSocket = async () => {
     const token = AsyncStorage.getItem(AsyncStorageKeys.TOKEN);
     // console.log('token', token)
@@ -56,34 +56,32 @@ export const App = () => {
   const sendPhoneNumber = (phoneNumber: string) => {
     socket2.emit('clientConnected', { phone: phoneNumber });
   };
-  
+
   socket2.connect();
     socket2.on('connect', () => {
-      // console.log('Socket connected 2');
       if (profile && profile.phone_number) {
         sendPhoneNumber(profile.phone_number);
         socket2.on('status', status => {
-          // console.log('status', status)
-          // console.log('status', status.status)
-
-
-
+          console.log({status})
 
           if(status.status == 'took') {
             handleSetOrderProcessStatus("took");
-           
+
           }
           else if(status.status == 'complete') {
             handleSetOrderProcessStatus("complete");
           }
-
+          else if(status.status == 'cancelled') {
+            handleSetOrderProcessStatus('cancelled')
+          }
         })
       }
     });
   }
+
   useEffect(() => {
     let unsubscribe;
-    if (profile !== null) {      
+    if (profile !== null) {
         handleConnectSocket();
         handleConnectSocket2()
 
@@ -99,10 +97,10 @@ export const App = () => {
       if (unsubscribe) {
         unsubscribe();
       }
-      
-    } 
+
+    }
   }, [profile]);
-  
+
 
 
 

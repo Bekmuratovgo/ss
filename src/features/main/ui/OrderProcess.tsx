@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useRef, useState } from "react";
+import {FC, useCallback, useContext, useEffect, useRef, useState} from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { Button } from "src/shared/components/Button";
 import { colors } from "src/shared/style";
@@ -17,8 +17,8 @@ type OrderProcessProps = TBottomSheetMethods &{
 
 export const OrderProcess: FC<OrderProcessProps> = ({ setBottomSheetState }) => {
     const [
-        { orderProcessStatus, order }, 
-        handleSetOrderProcessStatus, 
+        { orderProcessStatus, order },
+        handleSetOrderProcessStatus,
         handleSetBottomSheetState,
         handleSetFinishedOrder
     ] = useUnit([$main, setOrderProcessStatus, setFinishedOrder]);
@@ -44,9 +44,9 @@ export const OrderProcess: FC<OrderProcessProps> = ({ setBottomSheetState }) => 
             snapToPosition((points[0] = 215));
             handleSetSnapPoints(points.map((pos) => pos + 215));
             setSnapPos((points[0] = 215));
-        
+
     }, []);
-   
+
     const onReceivedDismiss = () => {
         console.log('onReceivedDismiss')
         handleSetOrderProcessStatus("received");
@@ -60,6 +60,10 @@ export const OrderProcess: FC<OrderProcessProps> = ({ setBottomSheetState }) => 
 
     };
 
+    const onCancelDismiss = useCallback(() => {
+      setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
+    }, [])
+
     return(
         <View style={styles.container}>
         <Text style={styles.title}>
@@ -69,7 +73,7 @@ export const OrderProcess: FC<OrderProcessProps> = ({ setBottomSheetState }) => 
             <Text style={styles.button_text}>OK</Text>
         </Button>
     </View>
-    
+
     );
 };
 

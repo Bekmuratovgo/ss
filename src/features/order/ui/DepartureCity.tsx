@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         backgroundColor: colors.gray,
         paddingVertical: 12,
+        height: 44,
         paddingHorizontal: 10,
         color: colors.white
     },

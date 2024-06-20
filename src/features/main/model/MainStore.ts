@@ -69,7 +69,7 @@ export const setOrderDetailsModal = createEvent<boolean>();
 export const setStatus = createEvent<MainStatusEnum>();
 export const resetOrder = createEvent();
 export const setOrderProcessStatus = createEvent<
-    null | "seeking" | "received" | "complete" | "took" | "null"
+    null | "seeking" | "received" | "complete" | "took" | "null" | 'cancelled'
 >();
 export const setFinishedOrder = createEvent<null | Order>();
 

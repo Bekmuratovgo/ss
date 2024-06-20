@@ -176,7 +176,6 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     container_header: {
         position: 'relative'
@@ -198,11 +197,9 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     body: {
-
         paddingVertical: Platform.OS === 'ios' ?  35 : 0,
         marginTop :  Platform.OS === 'android' ?  35 : 0,
         paddingHorizontal: 20,
-
     },
     input: {
         width: '100%',
@@ -212,6 +209,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.gray,
         paddingVertical: 12,
         paddingHorizontal: 10,
+        height: 44,
         color: colors.white
     },
     dropdown: {

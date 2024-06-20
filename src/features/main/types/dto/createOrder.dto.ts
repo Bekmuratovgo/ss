@@ -16,5 +16,4 @@ export type CreateOrderDto = {
     comment: string;
     full_price?: string;
     phone_number: string;
- 
 }
