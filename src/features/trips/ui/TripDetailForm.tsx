@@ -204,7 +204,7 @@ export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
                     <TouchableOpacity
                         style={styles.footer_button_icon}
                         onPress={() => {
-                            Linking.openURL("https://t.me/ug_transfer_online");
+                            Linking.openURL("https://t.me/UG_TRANSFER");
                         }}
                     >
                         <TelegramIcon />

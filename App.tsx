@@ -13,7 +13,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AsyncStorageKeys } from 'src/app/types/authorization';
 import { BottomSheetStateEnum } from 'src/features/main/enums/bottomSheetState.enum';
 import { setBottomSheetState } from 'src/features/main/model/BottomSheetStore';
-import { $main, setFinishedOrder, setOrderProcessStatus, setStatus } from 'src/features/main/model/MainStore';
+import {
+  $main,
+  setFinishedOrder,
+  setOrderProcessStatus,
+  setProceedingOrderId,
+  setStatus
+} from 'src/features/main/model/MainStore';
 
 Orientation.lockToPortrait();
 LogBox.ignoreAllLogs();
@@ -21,11 +27,12 @@ LogBox.ignoreAllLogs();
 export const App = () => {
   const [{ profile }] = useUnit([$profile]);
   const [
-    { orderProcessStatus, status,order },
+    { orderProcessStatus, status,order, proceedingOrderId },
     handleSetOrderProcessStatus,
     handleSetBottomSheetState,
-    handleSetFinishedOrder
-] = useUnit([$main, setOrderProcessStatus,setStatus, setBottomSheetState, setFinishedOrder]);
+    handleSetFinishedOrder,
+    handleSetProceedingOrderId
+] = useUnit([$main, setOrderProcessStatus,setStatus, setBottomSheetState, setFinishedOrder, setProceedingOrderId]);
 
   const handleConnectSocket = async () => {
     const token = AsyncStorage.getItem(AsyncStorageKeys.TOKEN);
@@ -62,11 +69,12 @@ export const App = () => {
       if (profile && profile.phone_number) {
         sendPhoneNumber(profile.phone_number);
         socket2.on('status', status => {
-          console.log({status})
+          if(status?.orderFullData?.order_id) {
+            handleSetProceedingOrderId(status.orderFullData.order_id)
+          }
 
           if(status.status == 'took') {
             handleSetOrderProcessStatus("took");
-
           }
           else if(status.status == 'complete') {
             handleSetOrderProcessStatus("complete");

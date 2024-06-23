@@ -17,7 +17,7 @@ export const DrawerContent: React.FC<IDrawerContentProps> = () => {
         <View
             style={[styles.layout, Platform.OS === "ios" && { paddingTop: 40, paddingBottom: 20 }]}>
                 <View style={styles.content}>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.profile_button}
                         onPress={() => navigation.navigate("Profile")}>
                                     <Image source={profile?.img ?  {uri: profile?.img} : UnknownUser} style={styles.avatar}/>
@@ -26,7 +26,7 @@ export const DrawerContent: React.FC<IDrawerContentProps> = () => {
                     </TouchableOpacity>
                     {
                         DRAWER_NAVS.map(({ icon, label, route, url }, index) => (
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 onPress={() => {
                                     if (route) {
                                         navigation.navigate(route);
@@ -35,7 +35,7 @@ export const DrawerContent: React.FC<IDrawerContentProps> = () => {
                                         Linking.openURL(url);
                                     }
                                 }}
-                                style={[styles.nav_button, index === 0 && styles.first_nav_button]} 
+                                style={[styles.nav_button, index === 0 && styles.first_nav_button]}
                                 key={index}>
                                     {icon}
                                 <Text style={[fonts.regular, styles.nav_text]}>{label}</Text>
@@ -44,11 +44,11 @@ export const DrawerContent: React.FC<IDrawerContentProps> = () => {
                     }
                 </View>
                 <View style={styles.footer}>
-                    <TouchableOpacity 
-                        onPress={() => Linking.openURL("https://t.me")}>
+                    <TouchableOpacity
+                        onPress={() => Linking.openURL("https://t.me/UG_TRANSFER")}>
                         <Text style={[fonts.regular, styles.footer_text]}>Помощь</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={styles.footer_button}
                         onPress={() => navigation.navigate("About")}>
                         <Text style={[fonts.regular, styles.footer_text]}>О сервисе</Text>

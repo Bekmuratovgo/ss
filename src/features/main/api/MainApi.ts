@@ -41,6 +41,20 @@ class MainApi extends AbstractApiRepository {
             }
         })
     }
+
+  async deleteOrder(order_id: number) {
+    const token = await checkAuthorization();
+    return this.apiClient.post({
+      url: Endpoints.deleteOrder,
+      data: {order_id},
+      config: {
+        headers: {
+          // Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + token
+        }
+      }
+    })
+  }
 }
 
 export const mainApi = new MainApi();

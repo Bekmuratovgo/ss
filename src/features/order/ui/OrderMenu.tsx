@@ -12,7 +12,7 @@ import {
   setEditingOrder,
   setFinishedOrder,
   setOrder,
-  setOrderProcessStatus,
+  setOrderProcessStatus, setProceedingOrderId,
   setStatus,
 } from "src/features/main/model/MainStore";
 import {CreateOrderDto} from "src/features/main/types/dto/createOrder.dto";
@@ -41,7 +41,8 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
     {order, editingOrder, status},
     handleSetOrder,
     handleSetEditingOrder,
-  ] = useUnit([$main, setOrder, setEditingOrder]);
+    handleSetProceedingOrderId,
+  ] = useUnit([$main, setOrder, setEditingOrder, setProceedingOrderId]);
   const [
     {arrivalLocation, departureLocation},
     handleSetDepartureLocation,
@@ -87,6 +88,9 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
     const points =
       BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.SET_ADDRESS];
 
+    setBottomSheetSnapPoint(BottomSheetStateEnum.SET_ADDRESS, [390, 480]);
+    snapToPosition(390);
+
     if (
       order.departure.city &&
       order.departure.address &&
@@ -102,11 +106,13 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
       snapToPosition(480);
     }
     if (isLoading) {
-      snapToPosition((points[0] = 300));
-      handleSetSnapPoints(points.map((pos) => pos + 300));
+      snapToPosition((points[0] = 350));
+      handleSetSnapPoints(points.map((pos) => pos + 350));
       handleSetIndex(0);
-      setSnapPos((points[0] = 300));
+      setSnapPos((points[0] = 350));
     }
+
+
   }, [
     isLoading,
     order.departure.city,
@@ -305,9 +311,15 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
     };
     try {
       const response: any = await createOrder(newOrder);
+
+      if(response?.order?.orders[0]?.order_id) {
+        handleSetProceedingOrderId(response?.order?.orders[0]?.order_id)
+      }
+
       if (response && response.message === "success") {
         setIsLoading(false);
         setBottomSheetState(BottomSheetStateEnum.ORDER_PROCESS);
+        handleSetOrderProcessStatus('seeking')
       } else if (
         response &&
         response.error_message &&

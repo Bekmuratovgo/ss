@@ -15,7 +15,9 @@ type TripDetailsProps = NativeStackScreenProps<StackScreens, "TripDetails">;
 export const TripDetails: FC<TripDetailsProps> = ({ navigation, route }) => {
     const { id } = route.params;
     const { trips } = useUnit($trips);
-    const order = trips?.find((item: Order) => item._id === id);
+    const order = trips?.find((item: Order) => item._id === id || item.order_id === Number(id));
+
+
     return (
         <SafeAreaView style={[styles.layout]}>
             <ScreenHeader
