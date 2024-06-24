@@ -147,7 +147,7 @@ export const OrderProcess: FC<OrderProcessProps> = ({setBottomSheetState}) => {
       {
         orderProcessStatus === 'seeking' ? <View style={styles.buttonContainer}>
             <Button disabled={isOrderCancelling} projectType="secondary" onPress={handleCancelOrder} style={[styles.button, styles.cancelButton]}>
-              {isOrderCancelling ? <ActivityIndicator /> : <Text>Отменить</Text>}
+              {isOrderCancelling ? <ActivityIndicator /> : <Text style={{color: colors.black}}>Отменить</Text>}
             </Button>
             <Button disabled={isOrderCancelling} projectType="primary" onPress={handleOrderMore} style={styles.button}>
               <Text>Заказать еще</Text>
