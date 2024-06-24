@@ -55,13 +55,13 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
   ] = useUnit([$main, setOrderProcessStatus, setStatus, setFinishedOrder]);
   const [{profile}] = useUnit([$profile]);
 
-  useEffect(() => {
-    if (orderProcessStatus === "took") {
-      setBottomSheetState(BottomSheetStateEnum.ORDER_PROCESS);
-    } else if (orderProcessStatus === "complete") {
-      setBottomSheetState(BottomSheetStateEnum.ORDER_FINISHED);
-    }
-  });
+  // useEffect(() => {
+  //   if (orderProcessStatus === "took") {
+  //     setBottomSheetState(BottomSheetStateEnum.ORDER_PROCESS);
+  //   } else if (orderProcessStatus === "complete") {
+  //     setBottomSheetState(BottomSheetStateEnum.ORDER_FINISHED);
+  //   }
+  // }, [orderProcessStatus]);
 
   const [price, setPrice] = useState<number>();
   const [distance, setDistance] = useState<any>();
@@ -208,7 +208,8 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
           }
 
 
-          setPrice(response?.totalPrice?.fullCost + price);
+
+          setPrice((response?.totalPrice?.fullCost || response?.totalPrice) + price);
         } else {
           console.log("Не хватает данных для отправки запроса.");
         }
@@ -527,7 +528,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
                       styles.centerLine,
                     ]}
                   >
-                    <Text>Заказать авто</Text>
+                    <Text style={{color: colors.black}}>Заказать авто</Text>
                     <View style={styles.button_holder2}>
                       <Text>
                         {" "}
@@ -664,6 +665,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: -100,
     fontSize: 16,
+    color: colors.black,
   },
   button_holder3: {
     position: "absolute",

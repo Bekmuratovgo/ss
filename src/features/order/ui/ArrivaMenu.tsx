@@ -1,3 +1,4 @@
+import {AdditionalArrival} from "src/features/main/types/order";
 import { useUnit } from "effector-react";
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import {
@@ -71,7 +72,7 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
         try {
           console.log('setDeparture 10')
             handleSetOrder({...order, newArrivals: [...order.additionalArrivals]});
-            let stopsArr: any = [...order.additionalArrivals];
+            let stopsArr: AdditionalArrival[] = [...order.additionalArrivals];
             for (let i = 0; i < stopsArr.length; i++){
                 if (stopsArr[i].city !== '' && stopsArr[i].address !== '') {
                     const res: any = await getGeocode(`${stopsArr[i].city},${stopsArr[i].address}`);
@@ -96,6 +97,9 @@ const ArriveMenu: FC<Props> = function ({ setBottomSheetState}) {
                     }
                 }
             }
+
+          stopsArr = stopsArr.filter(item => item.lat && item.lon)
+
           console.log('setDeparture 11')
             handleSetOrder({ ...order, arrival: editingOrder.arrival, additionalArrivals: [...stopsArr], newArrivals: [] });
         } catch(err) {

@@ -37,8 +37,6 @@ export const TripsList: FC<ITripsListProps> = ({ onTripPress }) => {
             try {
                 const response: any = await getTrips(profile.phone_number);
                 handleSetTrips(response);
-                console.log('trips', trips)
-                console.log('trips response ', response)
 
             } catch (err) {
                 toast.show("Не получилось получить поездки", {
@@ -50,6 +48,7 @@ export const TripsList: FC<ITripsListProps> = ({ onTripPress }) => {
 
         handleGetTrips();
     }, []);
+
 
     return (
         <ScrollView

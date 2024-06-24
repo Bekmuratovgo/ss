@@ -18,6 +18,18 @@ interface ITripItemProps {
     status: OrderStatusEnum;
 }
 
+const orderStatusColor = {
+  [OrderStatusEnum.selling]: colors.error,
+  [OrderStatusEnum.cancelled]: colors.white,
+  [OrderStatusEnum.in_process]: colors.green,
+  [OrderStatusEnum.finished]: colors.opacity,
+};
+
+const getTextStatusColor = (status: string) => {
+  return orderStatusColor[status] || colors.white
+}
+
+
 export const TripItem: FC<ITripItemProps> = ({
     departureCity,
     departureAddress,
@@ -29,19 +41,13 @@ export const TripItem: FC<ITripItemProps> = ({
     onPress,
     status,
 }) => {
-    const orderStatusColor = {
-        [OrderStatusEnum.selling]: colors.error,
-        [OrderStatusEnum.cancelled]: colors.error,
-        [OrderStatusEnum.in_process]: colors.green,
-        [OrderStatusEnum.finished]: colors.opacity,
-    };
     return (
         <TouchableOpacity style={[styles.container]} onPress={onPress}>
             <View style={styles.header}>
                 <Text
                     style={[
                         styles.header_text,
-                        { color: orderStatusColor[status] },
+                        { color: getTextStatusColor(status)},
                     ]}
                 >
                     {date}
@@ -71,7 +77,7 @@ export const TripItem: FC<ITripItemProps> = ({
                 <Text
                     style={[
                         styles.status_text,
-                        { color: orderStatusColor[status] },
+                        { color: getTextStatusColor(status) },
                     ]}
                 >
                     {status}

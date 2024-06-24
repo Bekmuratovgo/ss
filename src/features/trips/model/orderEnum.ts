@@ -3,6 +3,4 @@ export enum OrderStatusEnum {
     in_process = "Выполняется",
     finished = "Выполнено",
     cancelled = "Отменен",
-
-
 }

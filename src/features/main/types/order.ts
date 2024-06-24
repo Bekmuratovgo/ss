@@ -1,5 +1,12 @@
 import { PaymentMethodEnum } from "./paymentMethod.enum";
 
+export type AdditionalArrival =  {
+  city: string;
+  lat?: number;
+  lon?: number;
+  address: string;
+}
+
 export type Order = {
     departure: {
         city: string;

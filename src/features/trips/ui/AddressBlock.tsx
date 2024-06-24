@@ -31,7 +31,7 @@ export const AddressBlock: FC<AddressBlockProps> = ({departureCity, arrivalCity,
                 <View style={{ display: "flex", flexDirection: "row" }} key={index}>
                    <Text style={styles.city_text}>Остановка {index} : {' '}<Text>г.{arrival.city}</Text></Text>
                     <Text style={styles.address_text}>{arrival.address}</Text>
-               
+
                 </View>
             ))}
                 <View style={styles.address_holder}>
@@ -56,16 +56,17 @@ const styles = StyleSheet.create({
     },
     address_holder: {
         flexDirection: 'column',
-        rowGap: 5
+        rowGap: 5,
+        paddingRight: 20,
     },
     city_text: {
         color: colors.white,
         fontSize: 16,
-        fontWeight: "600"
+        fontWeight: "600",
     },
     address_text: {
         color: colors.white,
         fontSize: 16,
-        fontWeight: "300"
+        fontWeight: "300",
     },
 });

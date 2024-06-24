@@ -546,16 +546,16 @@
 				CODE_SIGN_ENTITLEMENTS = ygclient/ygclientDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5VRZ68G4M3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ygclient/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ygclient;
+				INFOPLIST_KEY_CFBundleDisplayName = "Такси Юг-Трансфер";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -579,15 +579,15 @@
 				CODE_SIGN_ENTITLEMENTS = ygclient/ygclientRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5VRZ68G4M3;
 				INFOPLIST_FILE = ygclient/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ygclient;
+				INFOPLIST_KEY_CFBundleDisplayName = "Такси  Юг-Трансфер";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

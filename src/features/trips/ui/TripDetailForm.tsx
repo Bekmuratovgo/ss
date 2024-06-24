@@ -19,7 +19,8 @@ type TripDetailFormProps = {
 };
 
 export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
-    return (
+
+  return (
         <>
             <ScrollView style={styles.body}>
                 <View style={styles.info_holder}>
@@ -77,12 +78,13 @@ export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
                         <View style={styles.section}>
                             <Text style={styles.driver_title}>Водитель</Text>
                             <Text style={styles.driver_name}>
-                                {order.order_driver.name}
+                                {order.order_driver.firstName} {order.order_driver.lastName}
                             </Text>
                             <View
                                 style={{ flexDirection: "row", columnGap: 10 }}
                             >
                                 <Image
+                                  style={{width: 100, height: 100, borderRadius: 100}}
                                     source={
                                         order.order_driver.avatar
                                             ? { uri: order.order_driver.avatar }
@@ -110,7 +112,7 @@ export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
                                                 fontSize: 16,
                                             }}
                                         >
-                                            {order.order_driver.carBrand}
+                                            {order.order_driver?.carBrandId?.title}
                                         </Text>
                                         <Text
                                             style={{
@@ -133,7 +135,7 @@ export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
                                                 fontSize: 16,
                                             }}
                                         >
-                                            {order.order_driver.carNumber}
+                                            {order.order_driver.publicNumber}
                                         </Text>
                                         <Text
                                             style={{

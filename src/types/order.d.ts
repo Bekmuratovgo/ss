@@ -1,4 +1,37 @@
-import { OrderStatusEnum } from "src/features/trips/model/orderEnum";
+import {OrderStatusEnum} from "src/features/trips/model/orderEnum";
+
+export type OrderDriver = {
+  "__v": number,
+  "_id": string,
+  "avatar": string,
+  "balance": number,
+  "carBrandId": {
+    title: string
+  },
+  "carColor": string,
+  "carModel": string,
+  "carPhotoArray": string[],
+  "code": string,
+  "fcm_token": null,
+  "firstName": string,
+  "is_banned": boolean,
+  "lastLoginTime": string,
+  "lastName": string,
+  "middleName": string,
+  "notification": boolean,
+  "passportArray": string[],
+  "phone": string,
+  "popup": boolean,
+  "publicNumber": string,
+  "regComplete": string,
+  "sound_signal": boolean,
+  "subToUrgent": boolean,
+  "subToUrgentDate": string,
+  "subscription_status": boolean,
+  "subscription_until": string,
+  "tariffId": string,
+  "telegram": string
+}
 
 export type Order = {
   _id?: string;
@@ -20,7 +53,9 @@ export type Order = {
   order_status: OrderStatusEnum;
   order_price?: string;
   order_dispatcher?: string;
-  order_driver?: any;
+  order_driver?: OrderDriver;
   order_payment: string;
   order_distance: number;
 }
+
+
