@@ -530,7 +530,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
                   >
                     <Text style={{color: colors.black}}>Заказать авто</Text>
                     <View style={styles.button_holder2}>
-                      <Text>
+                      <Text style={{color: colors.black}}>
                         {" "}
                         {price !== null &&
                           price !== undefined &&

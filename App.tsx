@@ -31,7 +31,7 @@ export const App = () => {
     handleSetOrderProcessStatus,
     handleSetBottomSheetState,
     handleSetFinishedOrder,
-    handleSetProceedingOrderId
+    handleSetProceedingOrderId,
 ] = useUnit([$main, setOrderProcessStatus,setStatus, setBottomSheetState, setFinishedOrder, setProceedingOrderId]);
 
   const handleConnectSocket = async () => {
@@ -69,18 +69,20 @@ export const App = () => {
       if (profile && profile.phone_number) {
         sendPhoneNumber(profile.phone_number);
         socket2.on('status', status => {
-          if(status?.orderFullData?.order_id) {
+          if(status?.orderFullData?.order_id && !proceedingOrderId) {
             handleSetProceedingOrderId(status.orderFullData.order_id)
           }
 
-          if(status.status == 'took') {
-            handleSetOrderProcessStatus("took");
-          }
-          else if(status.status == 'complete') {
-            handleSetOrderProcessStatus("complete");
-          }
-          else if(status.status == 'cancelled') {
-            handleSetOrderProcessStatus('cancelled')
+          if(!proceedingOrderId || proceedingOrderId === status?.orderFullData?.order_id) {
+            if(status.status == 'took') {
+              handleSetOrderProcessStatus("took");
+            }
+            else if(status.status == 'complete') {
+              handleSetOrderProcessStatus("complete");
+            }
+            else if(status.status == 'cancelled') {
+              handleSetOrderProcessStatus('cancelled')
+            }
           }
         })
       }

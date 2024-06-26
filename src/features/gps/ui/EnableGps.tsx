@@ -78,7 +78,6 @@ export const EnableGps: FC<Props> = memo(({ setBottomSheetState }) => {
                     {
                         enableHighAccuracy: true,
                         timeout: 10000,
-                        maximumAge: 1000,
                     }
                 );
                 handleSetGpsEnabled(true);

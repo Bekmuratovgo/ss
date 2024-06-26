@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-  <string>Такси Юг-Трансфер</string>
+	<string>Такси Юг-Трансфер</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconName</key>
@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>22</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true />
 	<key>LSRequiresIPhoneOS</key>

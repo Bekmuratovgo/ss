@@ -75,7 +75,7 @@ const Order = function ({ navigation }) {
                         const { latitude, longitude } = position.coords;
 
                         const response = await fetch(
-                            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+                            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&accept-language=ru`
                         );
                         const data = await response.json();
                         const city =
@@ -106,7 +106,6 @@ const Order = function ({ navigation }) {
                     {
                         enableHighAccuracy: true,
                         timeout: 5000,
-                        maximumAge: 1000,
                     }
                 );
             }

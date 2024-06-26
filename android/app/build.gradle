@@ -79,7 +79,7 @@ android {
         applicationId "com.grigor.ygclient"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
+        versionCode 22
         versionName "1.0.0"
     }
     signingConfigs {

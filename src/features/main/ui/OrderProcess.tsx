@@ -89,7 +89,7 @@ export const OrderProcess: FC<OrderProcessProps> = ({setBottomSheetState}) => {
 
   const onReceivedDismiss = () => {
     handleSetOrderProcessStatus("received");
-
+    handleSetProceedingOrderId(null)
     setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
   };
 
@@ -101,6 +101,7 @@ export const OrderProcess: FC<OrderProcessProps> = ({setBottomSheetState}) => {
 
   const onCancelDismiss = useCallback(() => {
     setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
+    handleSetProceedingOrderId(null)
   }, [])
 
   const handleCancelOrder = async () => {
@@ -150,7 +151,7 @@ export const OrderProcess: FC<OrderProcessProps> = ({setBottomSheetState}) => {
               {isOrderCancelling ? <ActivityIndicator /> : <Text style={{color: colors.black}}>Отменить</Text>}
             </Button>
             <Button disabled={isOrderCancelling} projectType="primary" onPress={handleOrderMore} style={styles.button}>
-              <Text>Заказать еще</Text>
+              <Text style={{color: colors.black}}>Заказать еще</Text>
             </Button>
           </View>
           : (
