@@ -51,13 +51,13 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
     }, []);
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
+          'keyboardWillShow',
           () => {
             setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
+          'keyboardWillHide',
           () => {
             setKeyboardVisible(false);
           }

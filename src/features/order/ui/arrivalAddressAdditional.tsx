@@ -63,13 +63,13 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
+          'keyboardWillShow',
           () => {
             setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
+          'keyboardWillHide',
           () => {
             setKeyboardVisible(false);
           }
@@ -94,7 +94,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
      */
     function handleChangeSearch(text: string) {
         setSearch(text);
-        setFoundCities(prev => prev.filter(item => item.toLowerCase().includes(text.toLowerCase())));
+        setFoundCities(prev => prev.filter(item => item.toLowerCase().includes(text.toLowerCase().trim())));
     }
 
     /**
@@ -126,7 +126,7 @@ const ArrivalAddressAdditonal: FC<Props> = function({setBottomSheetState}) {
         const searchQuery = arrival.city ? `${arrival.city},${search}` : search;
 
 
-        getAddress(searchQuery).then((res: any) => {
+        getAddress(searchQuery.trim()).then((res: any) => {
             setFoundCities(res.results.map((item) => item.title.text));
         }).catch(err => {
             console.error(err);

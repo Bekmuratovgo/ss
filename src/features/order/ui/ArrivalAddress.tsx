@@ -72,13 +72,13 @@ const ArrivalAddress: FC<Props> = function ({ setBottomSheetState }) {
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-            "keyboardDidShow",
+            "keyboardWillShow",
             () => {
                 setKeyboardVisible(true);
             }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-            "keyboardDidHide",
+            "keyboardWillHide",
             () => {
                 setKeyboardVisible(false);
             }
@@ -105,7 +105,7 @@ const ArrivalAddress: FC<Props> = function ({ setBottomSheetState }) {
         setSearch(text);
         setFoundAddress((prev) =>
             prev.filter((item) =>
-                item.toLowerCase().includes(text.toLowerCase())
+                item.toLowerCase().includes(text.toLowerCase().trim())
             )
         );
     }
@@ -132,7 +132,7 @@ const ArrivalAddress: FC<Props> = function ({ setBottomSheetState }) {
         const searchQuery = editingOrder.arrival.city
             ? `${editingOrder.arrival.city},${search}`
             : search;
-        getAddress(searchQuery)
+        getAddress(searchQuery.trim())
             .then((res: any) => {
                 setFoundAddress(res.results.map((item) => item.title.text));
             })

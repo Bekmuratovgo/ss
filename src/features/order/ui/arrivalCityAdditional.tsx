@@ -63,13 +63,13 @@ const ArrivalCityAdditonal: FC<Props> = function({setBottomSheetState}) {
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardDidShow',
+          'keyboardWillShow',
           () => {
             setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardDidHide',
+          'keyboardWillHide',
           () => {
             setKeyboardVisible(false);
           }
@@ -94,7 +94,7 @@ const ArrivalCityAdditonal: FC<Props> = function({setBottomSheetState}) {
      */
     function handleChangeSearch(text: string) {
         setSearch(text);
-        setFoundCities(prev => prev.filter(item => item.toLowerCase().includes(text.toLowerCase())));
+        setFoundCities(prev => prev.filter(item => item.toLowerCase().includes(text.toLowerCase().trim())));
     }
 
     /**
@@ -120,9 +120,9 @@ const ArrivalCityAdditonal: FC<Props> = function({setBottomSheetState}) {
         if (search === "") {
             return;
         }
-        getCities(search).then((res: any) => {
+        getCities(search.trim()).then((res: any) => {
             const filteredCities = res.results.map((item) => item.title.text)
-                .filter(city => city.toLowerCase().includes(search.toLowerCase()));
+                .filter(city => city.toLowerCase().includes(search.toLowerCase().trim()));
             setFoundCities(filteredCities);
         }).catch(err => {
             console.error(err);
