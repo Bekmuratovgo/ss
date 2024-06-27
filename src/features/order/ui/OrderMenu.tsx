@@ -79,9 +79,6 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
   const [snapPos, setSnapPos] = useState(
     BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.SET_ADDRESS][0]
   );
-  const [snapPos2, setSnapPos2] = useState(
-    BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.SET_ADDRESS][1]
-  );
 
   useEffect(() => {
     getBottomSheetSnapPoints();

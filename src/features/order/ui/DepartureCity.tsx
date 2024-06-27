@@ -106,6 +106,7 @@ const DepartureCity: FC<Props> = function({setBottomSheetState}) {
      */
     function handleSearchCities() {
         if (search === "") {
+            setFoundCities([])
             return;
         }
         getCities(search.trim()).then((res: any) => {
@@ -121,7 +122,7 @@ const DepartureCity: FC<Props> = function({setBottomSheetState}) {
      * Bounced fetching cities
      */
     useEffect(() => {
-        const getDataTimerId = setTimeout(handleSearchCities, 800);
+        const getDataTimerId = setTimeout(handleSearchCities, 500);
         return () => {
             clearTimeout(getDataTimerId);
         };
@@ -212,8 +213,7 @@ const styles = StyleSheet.create({
     dropdown: {
         width: '100%',
         paddingHorizontal: 20,
-
-
+        minHeight: 100
     },
     dropdown_item: {
         width: '100%',

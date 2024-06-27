@@ -169,7 +169,7 @@ export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
                                         fontSize: 16,
                                     }}
                                 >
-                                    +7 988 888 88 88
+                                  {order?.order_driver?.phone}
                                 </Text>
                             </View>
                         </View>

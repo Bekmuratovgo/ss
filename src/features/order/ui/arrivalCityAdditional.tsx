@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     dropdown: {
         width: '100%',
         paddingHorizontal: 20,
-        maxHeight: 200
+        maxHeight: 200,
     },
     dropdown_item: {
         width: '100%',
@@ -240,11 +240,12 @@ const styles = StyleSheet.create({
     dropdown_item_first: {
         width: '100%',
         paddingHorizontal: 10,
-        paddingVertical: 20,
         borderBottomWidth: 1,
         borderBottomColor: colors.line,
         borderTopWidth: 1,
         borderTopColor: colors.line,
+        height: 60,
+        justifyContent: 'center'
     },
     dropdown_item_text: {
         color: colors.white,

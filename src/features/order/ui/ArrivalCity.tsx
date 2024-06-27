@@ -1,4 +1,5 @@
 import {
+  FlatList,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -108,12 +109,14 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
      */
     function handleSearchCities() {
         if (search === "") {
+          setFoundCities([])
             return;
         }
         getCities(search.trim()).then((res: any) => {
             const filteredCities = res.results.map((item) => item.title.text)
                 .filter(city => city.toLowerCase().includes(search.toLowerCase().trim()));
             setFoundCities(filteredCities);
+          console.log(filteredCities, search)
         }).catch(err => {
             console.error(err);
         });
@@ -122,7 +125,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
      * Bounced fetching cities
      */
     useEffect(() => {
-        const getDataTimerId = setTimeout(handleSearchCities, 800);
+        const getDataTimerId = setTimeout(handleSearchCities, 500);
         return () => {
             clearTimeout(getDataTimerId);
         };
@@ -152,7 +155,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
                             onChangeText={handleChangeSearch}/>
                 </View>
                 {
-                    foundCities.length > 0 &&
+                    !!foundCities.length ?
                     <BottomSheetFlatList
                     data={foundCities}
                     keyExtractor={(city) => `${city}`}
@@ -164,6 +167,7 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
                                     <Text style={[fonts.regular, styles.dropdown_item_text]}>{item}</Text>
                         </TouchableOpacity>
                     )}/>
+                      : null
                 }
 
             </View>
@@ -215,7 +219,7 @@ const styles = StyleSheet.create({
     dropdown: {
         width: '100%',
         paddingHorizontal: 20,
-
+        minHeight: 100
     },
     dropdown_item: {
         width: '100%',

@@ -3,7 +3,7 @@ import { BottomSheetStateEnum } from "../enums/bottomSheetState.enum";
 
 export let BOTTOM_SHEET_SNAP_POINTS = {
     [BottomSheetStateEnum.LOADING]: Platform.OS === "ios" ? [653] : [653],
-    [BottomSheetStateEnum.ORDER_DETAIL]: Platform.OS === "ios" ? [520] : [623],
+    [BottomSheetStateEnum.ORDER_DETAIL]: Platform.OS === "ios" ? [560] : [623],
     [BottomSheetStateEnum.ENABLE_GPS]: Platform.OS === "ios" ? [440] : [440],
     [BottomSheetStateEnum.SET_ADDRESS]: Platform.OS === "ios" ? [390,390] : [400,500],
     [BottomSheetStateEnum.DEFINED_PAYMENT_METHOD]: Platform.OS === "ios" ? [225] : [225],

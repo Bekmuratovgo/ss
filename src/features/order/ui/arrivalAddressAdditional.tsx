@@ -240,11 +240,12 @@ const styles = StyleSheet.create({
     dropdown_item_first: {
         width: '100%',
         paddingHorizontal: 10,
-        paddingVertical: 20,
         borderBottomWidth: 1,
         borderBottomColor: colors.line,
         borderTopWidth: 1,
         borderTopColor: colors.line,
+        height: 60,
+        justifyContent: 'center'
     },
     dropdown_item_text: {
         color: colors.white,
