@@ -49,7 +49,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
     handleSetArrivalLocation,
   ] = useUnit([$map, setDepartureLocation, setArrivalLocation]);
   const [
-    {orderProcessStatus},
+    {orderProcessStatus, proceedingOrderId},
     handleSetOrderProcessStatus,
     handleSetFinishedOrder,
   ] = useUnit([$main, setOrderProcessStatus, setStatus, setFinishedOrder]);
@@ -310,14 +310,15 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
     try {
       const response: any = await createOrder(newOrder);
 
-      if(response?.order?.orders[0]?.order_id) {
-        handleSetProceedingOrderId(response?.order?.orders[0]?.order_id)
-      }
-
       if (response && response.message === "success") {
         setIsLoading(false);
+        if(response?.order?.orders[0]?.order_id !== proceedingOrderId || response?.order?.orders[0]?.order_id === proceedingOrderId && orderProcessStatus !== 'cancelled') {
+          handleSetOrderProcessStatus('seeking')
+        }
+        if(response?.order?.orders[0]?.order_id) {
+            handleSetProceedingOrderId(response?.order?.orders[0]?.order_id)
+        }
         setBottomSheetState(BottomSheetStateEnum.ORDER_PROCESS);
-        handleSetOrderProcessStatus('seeking')
       } else if (
         response &&
         response.error_message &&

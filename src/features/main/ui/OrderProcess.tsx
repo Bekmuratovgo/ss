@@ -94,9 +94,7 @@ export const OrderProcess: FC<OrderProcessProps> = ({setBottomSheetState}) => {
   };
 
   const onSeekingDismiss = () => {
-    console.log('onSeekingDismiss')
     setBottomSheetState(BottomSheetStateEnum.SET_ADDRESS);
-
   };
 
   const onCancelDismiss = useCallback(() => {
@@ -109,8 +107,6 @@ export const OrderProcess: FC<OrderProcessProps> = ({setBottomSheetState}) => {
       if(proceedingOrderId) {
         handleSetIsOrderCancelling(true)
         const response = await deleteOrder(proceedingOrderId)
-
-        console.log(response)
 
         if(response) {
           handleSetOrder({...defaultOrderData, departure: order.departure})
