@@ -1,3 +1,4 @@
+import {getKeyboardEventType} from "src/helpers/getKeyboardEventType";
 import React, { useEffect, useRef, useState } from "react";
 import { Keyboard, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { Button } from "src/shared/components/Button";
@@ -51,13 +52,13 @@ export const OrderDetails: React.FC<OrderDetailsProps> = ({setBottomSheetState})
     }, []);
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardWillShow',
+          getKeyboardEventType('show'),
           () => {
             setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardWillHide',
+          getKeyboardEventType('hide'),
           () => {
             setKeyboardVisible(false);
           }

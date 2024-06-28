@@ -14,6 +14,7 @@ const checkAuthorization = async () => {
 class MainApi extends AbstractApiRepository {
     async getCities(city: string) {
         const token = await checkAuthorization();
+
         return this.apiClient.get<ICity[]>({
             url: Endpoints.getCity,
             config: {

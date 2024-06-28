@@ -1,4 +1,4 @@
-import {OrderDriver} from "@src/types/order";
+import {OrderDriver} from "src/types/order";
 import React from 'react'
 import {Image, StyleSheet, Text, View} from "react-native";
 

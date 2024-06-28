@@ -56,7 +56,7 @@ export const TripDetailForm: FC<TripDetailFormProps> = ({ order }) => {
                     </View>
                     <View style={styles.param_item}>
                         <Text style={styles.param_key}>
-                            количество человек:{" "}
+                            Количество человек:{" "}
                         </Text>
                         <Text style={styles.param_value}>
                             {order?.order_count_people

@@ -1,5 +1,5 @@
-import {getBottomSheetOffset} from "@src/features/order/constants/SnapPoints";
-import {BottomSheetStateEnum} from "@src/features/order/enums/bottomSheetState.enum";
+import {getBottomSheetOffset} from "src/features/order/constants/SnapPoints";
+import {BottomSheetStateEnum} from "src/features/order/enums/bottomSheetState.enum";
 import React, {Dispatch, memo, SetStateAction, useCallback, useEffect, useRef, useState} from "react";
 import {Dimensions, LayoutChangeEvent, StyleSheet, View} from "react-native";
 import WebView, {WebViewMessageEvent} from "react-native-webview";

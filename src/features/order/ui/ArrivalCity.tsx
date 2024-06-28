@@ -1,3 +1,4 @@
+import {getKeyboardEventType} from "src/helpers/getKeyboardEventType";
 import {
   FlatList,
   Keyboard,
@@ -61,13 +62,13 @@ const ArrivalCity: FC<Props> = function({setBottomSheetState}) {
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
-          'keyboardWillShow',
+          getKeyboardEventType('show'),
           () => {
             setKeyboardVisible(true);
           }
         );
         const keyboardDidHideListener = Keyboard.addListener(
-          'keyboardWillHide',
+          getKeyboardEventType('hide'),
           () => {
             setKeyboardVisible(false);
           }

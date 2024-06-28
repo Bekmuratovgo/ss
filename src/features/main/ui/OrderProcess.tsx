@@ -1,10 +1,10 @@
 import {BottomSheetModal, useBottomSheet} from "@gorhom/bottom-sheet";
 import {useNavigation} from "@react-navigation/native";
-import {deleteOrder} from "@src/features/main/model/main-actions";
-import {$profile} from "@src/features/profile";
+import {deleteOrder} from "src/features/main/model/main-actions";
+import {$profile} from "src/features/profile";
 import {$trips} from "@src/features/trips";
-import {getTrips} from "@src/features/trips/model/trips-actions";
-import {setTrips} from "@src/features/trips/model/TripsStore";
+import {getTrips} from "src/features/trips/model/trips-actions";
+import {setTrips} from "src/features/trips/model/TripsStore";
 import {ca} from "date-fns/locale";
 import {useUnit} from "effector-react";
 import {FC, useCallback, useEffect, useRef, useState} from "react";

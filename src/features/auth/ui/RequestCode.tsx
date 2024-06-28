@@ -42,7 +42,9 @@ export const RequestCode: FC<IRequestCodeProps> = ({
             setLoading(true);
             const data: any = await requestCode(phone);
             if (data && data.success) {
-                Alert.alert(data.code);
+                if(__DEV__) {
+                  Alert.alert(data.code);
+                }
                 onVerifyCode();
             }
         } catch (err) {

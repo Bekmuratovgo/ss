@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         width: "55%",
         objectFit: "contain",
-        marginVertical: 40,
+        marginVertical: 20,
     },
     codeChar: {
         borderBottomWidth: 2,
