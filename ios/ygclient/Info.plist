@@ -23,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>25</string>
+	<string>27</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<true />
 	<key>LSRequiresIPhoneOS</key>
@@ -34,22 +34,22 @@
 		<true />
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Allow play music</string>
+	<string>Разрешите приложению воспроизводить музыку из вашей библиотеки для улучшения пользовательского опыта.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow camera</string>
+	<string>Разрешите приложению доступ к камере для возможности фотографирования и сканирования QR-кодов.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow location always</string>
+	<string>Приложению требуется доступ к вашему местоположению всегда для обеспечения точных данных о вашем местонахождении и улучшения качества обслуживания.</string>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<dict>
 		<key>YOUR-PURPOSE-KEY</key>
 		<string>YOUR TEXT</string>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow location when in use</string>
+	<string>Приложению требуется доступ к вашему местоположению во время использования для предоставления точных данных о маршруте и времени прибытия.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Load photos</string>
+	<string>Разрешите приложению доступ к фотогалерее для загрузки и обмена изображениями.</string>
 	<key>NSUserNotificationsUsageDescription</key>
-	<string>Разрешить получать уведомления</string>
+	<string>Разрешите приложению отправлять вам уведомления о статусе поездок, специальных предложениях и других важных событиях.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Black.ttf</string>
