@@ -76,8 +76,9 @@ export const EnableGps: FC<Props> = memo(({ setBottomSheetState }) => {
                         console.error("Failed to get current location", error);
                     },
                     {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
+                        enableHighAccuracy: false,
+                        timeout: 15000,
+                        maximumAge: 3000,
                     }
                 );
                 handleSetGpsEnabled(true);

@@ -104,8 +104,9 @@ const Order = function ({ navigation }) {
                         console.error("Failed to get current location", error);
                     },
                     {
-                        enableHighAccuracy: true,
-                        timeout: 5000,
+                      enableHighAccuracy: false,
+                      timeout: 15000,
+                      maximumAge: 3000,
                     }
                 );
             }
