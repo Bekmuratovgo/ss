@@ -4,13 +4,13 @@ import { PERMISSIONS, RESULTS, check } from "react-native-permissions";
 import { BottomSheetStateEnum } from "src/features/order/enums/bottomSheetState.enum";
 
 const OS_PERMISSIONS = {
-    "android": PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION,
+    "android": PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
     "ios": PERMISSIONS.IOS.LOCATION_WHEN_IN_USE
 }
 
 const useGpsPermissionCheck = function(setBottomSheetState: (value: BottomSheetStateEnum) => void) {
     const [isGpsEnabled, setIsGpsEnabled] = useState<boolean>(false);
-    
+
     function checkGpsPermission() {
         check(OS_PERMISSIONS[Platform.OS])
             .then((result) => {
@@ -20,7 +20,7 @@ const useGpsPermissionCheck = function(setBottomSheetState: (value: BottomSheetS
                 }
                 else {
                     setBottomSheetState(BottomSheetStateEnum.ENABLE_GPS);
-                }    
+                }
             }).catch(() => {
                 setIsGpsEnabled(false);
                 setBottomSheetState(BottomSheetStateEnum.ENABLE_GPS);
@@ -28,7 +28,7 @@ const useGpsPermissionCheck = function(setBottomSheetState: (value: BottomSheetS
     }
 
     useEffect(checkGpsPermission, []);
-    
+
     return({
         isGpsEnabled
     });
