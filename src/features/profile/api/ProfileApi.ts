@@ -31,11 +31,22 @@ class ProfileApi extends AbstractApiRepository {
             },
         })
     };
-    async updateFcmToken(fcm_token: string) {
+    async updateFcmToken(fcm_token: string, phone_number: string) {
         const token = await AsyncStorage.getItem(AsyncStorageKeys.TOKEN);
         return this.apiClient.put({
             url: Endpoints.updateFcmToken,
-            data: { fcm_token },
+            data: { fcm_token, user_phone: phone_number },
+            config: {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            }
+        })
+    }
+    async getLatestVersionApp() {
+        const token = await AsyncStorage.getItem(AsyncStorageKeys.TOKEN);
+        return this.apiClient.get({
+            url: Endpoints.getLatestVersion,
             config: {
                 headers: {
                     Authorization: 'Bearer ' + token

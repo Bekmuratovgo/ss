@@ -13,9 +13,12 @@ const checkAuthorization = async () => {
 class OrderApi extends AbstractApiRepository {
     async getCities(query: string) {
         const apiKey = 'e35cdf79-1eb6-4895-96c0-038767c7af03';
-        return this.apiClient.get<ICity[]>({
+        const res = this.apiClient.get<ICity[]>({
             url: `https://suggest-maps.yandex.ru/v1/suggest?apikey=${apiKey}&text=${query}&types=locality` // Free yandex api to search objects (locality == cities, villages and regions)
         });
+        console.log(res, 'CHECK--');
+        
+        return res;
     };
     async getAddress(query: string) {
         const apiKey = 'e35cdf79-1eb6-4895-96c0-038767c7af03';
@@ -25,16 +28,24 @@ class OrderApi extends AbstractApiRepository {
     };
 
     async createOrder(data) {
+        console.log(data, 'ORDER');
+        
         const token = await checkAuthorization();
-        return this.apiClient.post({
+        const res = this.apiClient.post({
             url: Endpoints.createOrder,
-            data,
+            data: {
+                ...data, 
+                order_distance: ''
+            },
             config: {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
             }
         })
+        console.log(res, 'ORDER-3');
+        
+        return res
     };
     async getPrice(data) {
         const token = await checkAuthorization();

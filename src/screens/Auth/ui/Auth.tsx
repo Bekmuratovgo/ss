@@ -60,6 +60,8 @@ export const Auth: FC<IAuthProps> = ({ navigation }) => {
 
     const handleAuthorize = async (token: string, profile: Profile) => {
         await AsyncStorage.setItem(AsyncStorageKeys.TOKEN, token);
+        console.log(profile, 'profile-2');
+        
         handleSetProfile(profile);
         if(!profile.full_name){
             navigation.navigate("Profile");

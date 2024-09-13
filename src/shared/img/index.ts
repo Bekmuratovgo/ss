@@ -34,8 +34,14 @@ import AboutLinkIcon from './about-link-icon.svg';
 import LocationScopeIcon from './location-scope-icon.svg';
 import UrgentIcon from './urgent.png'
 import downIcon from './down.png'
+import VectorIcon from './Vector.svg'
+import DetailsIcon from './details.svg'
+import WalletIcon from './wallet.svg'
+
 
 export {
+    DetailsIcon,
+    WalletIcon,
     MenuIcon,
     downIcon,
     UrgentIcon,
@@ -70,5 +76,6 @@ export {
     LightLogo,
     StatusBarBackground,
     AboutLinkIcon,
-    LocationScopeIcon
+    LocationScopeIcon,
+    VectorIcon,
 };

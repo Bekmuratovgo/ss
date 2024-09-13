@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useUnit} from 'effector-react';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LogBox, Platform, StyleSheet} from 'react-native';
 import Orientation from 'react-native-orientation-locker';
 import {Host} from 'react-native-portalize';
@@ -19,6 +19,9 @@ import {
 } from 'src/features/main/model/MainStore';
 import {$profile, updateFcmToken} from 'src/features/profile';
 import {MainRouter} from './src/routes';
+import { UpdateModal } from 'src/shared/components/UpdateModal';
+import { getVersion } from 'react-native-device-info';
+import { getLatestVersionApp } from 'src/features/profile/model/profile-actions';
 
 Orientation.lockToPortrait();
 LogBox.ignoreAllLogs();
@@ -33,7 +36,10 @@ export const App = () => {
     handleSetProceedingOrderId,
   ] = useUnit([$main, setOrderProcessStatus, setStatus, setBottomSheetState, setFinishedOrder, setProceedingOrderId]);
 
+  const [updateVisible, setUpdateVisible] = useState(false);
+
   const handleConnectSocket = async () => {
+
     const token = AsyncStorage.getItem(AsyncStorageKeys.TOKEN);
     // console.log('token', token)
     const socket = io('http://5.35.89.71:3001', {
@@ -86,20 +92,37 @@ export const App = () => {
     });
   }
 
+  const checkForUpdate = async () => {
+    const CURRENT_VERSION = getVersion();
+
+    try {
+      const {data, status}: any = await getLatestVersionApp()
+      
+      if (data && data.version !== CURRENT_VERSION) {
+        setUpdateVisible(true);
+      }
+    } catch (error) {
+      console.error('Error checking for update:', error);
+    }
+  };
+
   useEffect(() => {
     let unsubscribe;
     if (profile !== null) {
       handleConnectSocket();
       handleConnectSocket2()
+      console.log(profile, 'profile-main');
 
       // Firebase notification fcm token
       getFcmToken().then((token) => {
-        if (!profile.fcm_token || profile.fcm_token !== token) {
-          updateFcmToken(token)
+        if (!profile.fcm_token || profile.fcm_token !== token) {          
+          updateFcmToken(token, profile.phone_number)
         }
       });
       unsubscribe = registerListenerWithFCM();
     }
+    checkForUpdate()
+
     return () => {
       if (unsubscribe) {
         unsubscribe();
@@ -107,7 +130,6 @@ export const App = () => {
 
     }
   }, [profile]);
-
 
   return (
     <SafeAreaProvider style={styles.container}>
@@ -118,6 +140,7 @@ export const App = () => {
         {/* @ts-ignore */}
       </ToastProvider>
       <Toast ref={ref => (global['toast'] = ref)}/>
+      <UpdateModal visible={updateVisible} />
     </SafeAreaProvider>
   );
 };

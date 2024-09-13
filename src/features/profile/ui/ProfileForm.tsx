@@ -82,6 +82,7 @@ export const ProfileForm: FC<IProfileFormProps> = ({ navigateToAuth,navigateToMa
             }
             const data: any = await updateProfile(updateData);
             const profile: Profile = await getProfile();
+            console.log(profile, 'profile-3');
             handleSetProfile(profile);
 
             if(profile.firstName && profile.lastName && profile.img){

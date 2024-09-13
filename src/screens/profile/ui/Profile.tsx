@@ -22,9 +22,9 @@ export const Profile: FC<IProfileProps> = ({ navigation }) => {
         if (!profile.firstName) {
             fieldsToFill += "Имя, ";
         }
-        if (!profile.img) {
-            fieldsToFill += "Аватар";
-        }
+        // if (!profile.img) {
+        //     fieldsToFill += "Аватар";
+        // }
 
         if (fieldsToFill !== "") {
             Alert.alert("Заполните следующие поля:", fieldsToFill);

@@ -10,7 +10,13 @@ export const updateProfile = async (updateData) => {
     return data;
 }
 
-export const updateFcmToken = async (token: string) => {
-    const { data } = await profileApi.updateFcmToken(token);
+export const updateFcmToken = async (token: string, phone_number: string) => {
+    const { data } = await profileApi.updateFcmToken(token, phone_number);
+    return data;
+}
+
+export const getLatestVersionApp = async () => {
+    const data = await profileApi.getLatestVersionApp();
+    
     return data;
 }

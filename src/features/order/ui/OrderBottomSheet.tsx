@@ -17,6 +17,7 @@ const OrderBottomSheet = function({bottomSheetState, setBottomSheetState}: Order
     useGpsPermissionCheck(setBottomSheetState)
 
     const snapPoints = useMemo(() => BOTTOM_SHEET_SNAP_POINTS[bottomSheetState], [bottomSheetState]);
+    console.log(snapPoints, 'snapPoints');
 
     return(
         <BottomSheet

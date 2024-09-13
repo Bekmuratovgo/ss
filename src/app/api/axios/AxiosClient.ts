@@ -14,7 +14,8 @@ export default class AxiosClient implements IApiClient {
 
   constructor(config?: AxiosRequestConfig) {
     this.api = axios.create(config);
-    this.api.defaults.baseURL = appConfig.apiUrl;
+    
+    // this.api.defaults.baseURL = appConfig.apiUrl;
 
     this.setInterceptorRequest();
     this.setInterceptorResponse();
@@ -29,18 +30,26 @@ export default class AxiosClient implements IApiClient {
   };
 
   get = <T extends {}>(config: IAxiosConfig) => {
+    console.log(config?.url, 'CONFIG-get');
+    
     return this.api.get<T>(config.url, config.config);
   };
 
   post = <T extends {}>(config: IAxiosConfig) => {
+    console.log(config?.url, 'CONFIG-post');
+
     return this.api.post<T>(config.url, config.data, config.config);
   };
 
   put = <T extends {}>(config: IAxiosConfig) => {
+    console.log(config?.url, 'CONFIG-put');
+
     return this.api.put<T>(config.url, config.data, config.config);
   };
 
   delete = <T extends {}>(config: IAxiosConfig) => {
+    console.log(config?.url, 'CONFIG-del');
+
     return this.api.delete<T>(config.url, config.config);
   };
 

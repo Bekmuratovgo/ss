@@ -52,6 +52,7 @@ const Order = function ({ navigation }) {
         }
         try {
             const profile: Profile = await getProfile();
+            console.log(profile, 'profile-5');
             handleSetProfile(profile);
         } catch (err) {
             return navigation.navigate("Auth");

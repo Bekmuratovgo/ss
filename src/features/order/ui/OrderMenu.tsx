@@ -26,7 +26,7 @@ import {
 } from "src/features/order/model/bottomSheetStateStore";
 import {$profile} from "src/features/profile";
 import {Button} from "src/shared/components/Button";
-import {ArrowRightPrimaryIcon, ClockIcon, CrossIcon, EditOptionsIcon, LocationMarkIcon,} from "src/shared/img";
+import {ArrowRightPrimaryIcon, VectorIcon, CrossIcon, EditOptionsIcon, LocationMarkIcon, WalletIcon, DetailsIcon,} from "src/shared/img";
 import {colors} from "src/shared/style";
 import {BOTTOM_SHEET_SNAP_POINTS, getBottomSheetSnapPoints, setBottomSheetSnapPoint,} from "../constants/SnapPoints";
 import {BottomSheetStateEnum} from "../enums/bottomSheetState.enum";
@@ -155,6 +155,53 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
   }
 
   const [carClass, setCarclass] = useState();
+
+  const getAllTarifPrices = async () => {
+
+    CARS_CLASSES.map( async(item) => {
+      const newOrder: CreateOrderDto = {
+        from: order.departure.city,
+        to: order.arrival.city,
+        fulladressend: order.arrival.address,
+        fulladressstart: order.departure.address,
+        date: dayjs(order.date).format("DD.MM.YYYY"),
+        time: dayjs(order.date).format("HH:mm"),
+        comment: order.comment,
+        countPeople:
+          order.passangersAmount !== "" ? order.passangersAmount : "1",
+        tariffId: item.label,
+        isUrgent: item.label === "Срочный" ? true : false,
+        isAnimal: order.params.animalTransfer,
+        isBaby: order.params.babyChair,
+        isBuster: order.params.buster,
+        isBagage: order.baggage !== "" ? order.baggage : "1",
+        additional: order.additionalArrivals
+          ? order.additionalArrivals.map(
+            (arrival) => `${arrival.city},${arrival.address}`
+          )
+          : [],
+        full_price: `${price}`,
+        phone_number: profile.phone_number,
+      };
+  
+      const response = await getPrice(newOrder)
+
+    })
+
+    let price = 0;
+    if (order.params.babyChair) {
+      price += 500;
+    }
+    if (order.params.animalTransfer) {
+      price += 500;
+    }
+    if (order.params.buster) {
+      price += 200;
+    }
+
+    setPrice((response?.totalPrice?.fullCost || response?.totalPrice) + price);
+  }
+
   useEffect(() => {
     const handleCreateOrders = async () => {
       try {
@@ -248,7 +295,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
             const lat = parseFloat(points.split(" ")[1]);
             const lon = parseFloat(points.split(" ")[0]);
 
-            handleSetArrivalLocation({lon, lat});
+            handleSetArrivalLocation({ lon, lat });
           }
         })
         .catch((err) =>
@@ -269,7 +316,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
       (!order.departure.city || !order.departure.address) &&
       (departureLocation || departureLocation)
     ) {
-      handleSetDepartureLocation({lon: null, lat: null});
+      handleSetDepartureLocation({ lon: null, lat: null });
     }
   }, [order.arrival, order.departure]);
 
@@ -278,9 +325,13 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
       return;
     }
 
+    if (!order.date) {
+      return;
+    }
+  
     setIsLoading(true);
     console.log('setDeparture 17')
-    handleSetOrder({...order, distance: distance, price: price});
+    handleSetOrder({ ...order, distance: distance, price: price });
 
     const newOrder: CreateOrderDto = {
       from: order.departure.city,
@@ -377,7 +428,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
 
   return (
     <View>
-      {isLoading && <Loading/>}
+      {isLoading && <Loading />}
       {!isLoading && (
         <View style={styles.container}>
           <View style={styles.address_holder}>
@@ -385,7 +436,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
               onPress={openDepartureAdddress}
               projectType="address_input"
             >
-              <LocationMarkIcon/>
+              <LocationMarkIcon />
               <Text
                 numberOfLines={1}
                 style={[styles.address_input_text]}
@@ -393,14 +444,14 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
               >
                 {getDepartureAddressButton()}
               </Text>
-              <EditOptionsIcon/>
+              <EditOptionsIcon />
             </Button>
             <Button
               onPress={openArrivaleAdddress}
               projectType="address_input"
             >
               <ArrowRightPrimaryIcon
-                style={{marginHorizontal: 8}}
+                style={{ marginHorizontal: 8 }}
               />
               <Text
                 numberOfLines={1}
@@ -419,23 +470,24 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
                   console.log('setDeparture 18')
                   handleSetOrder({
                     ...order,
-                    arrival: {city: "", address: ""},
+                    arrival: { city: "", address: "" },
                   });
                   handleSetEditingOrder({
                     ...editingOrder,
-                    arrival: {city: "", address: ""},
+                    arrival: { city: "", address: "" },
                   });
                 }}
               >
-                <CrossIcon style={{marginHorizontal: 7}}/>
+                <CrossIcon style={{ marginHorizontal: 7 }} />
               </TouchableOpacity>
             </Button>
             <Button
+              style={[styles.dateButtonWrapper]}
               onPress={() => setIsDatePickerOpen(true)}
               projectType="address_input"
             >
-              <ClockIcon width={25} style={styles.payment_icon}/>
-              <View style={[styles.centerLine2]}>
+              {/* <ClockIcon width={25} style={styles.payment_icon}/> */}
+              {/* <View style={[styles.centerLine2]}>
                 <Text style={[styles.address_input_text]}>
                   {dayjs(order.date).format("DD.MM.YYYY")}
                 </Text>
@@ -445,6 +497,15 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
                     {dayjs(order.date).format("HH:mm")}
                   </Text>
                 </View>
+              </View> */}
+              <View style={[styles.dateBLock]}>
+                <Text style={[styles.dateText1]}>
+                  {dayjs(order.date).format("DD.MM.YYYY")}
+                </Text>
+                <Text style={[styles.dateText2]}>
+                  {" "}
+                  {dayjs(order.date).format("HH:mm")}
+                </Text>
               </View>
               <DatePicker
                 modal
@@ -462,10 +523,14 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
             </Button>
           </View>
           <SelectCarClass
+            endPrice={price !== null &&
+              price !== undefined && price
+            }
             selectCarClass={selectCarClass}
             activeCarClassIndex={order.carClass}
           />
-          <View style={styles.details}>
+
+          {/* <View style={styles.details}>
             <TouchableOpacity
               onPress={() => handleOpenPaymentSheet()}
               style={styles.payment_block}
@@ -505,39 +570,58 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
                 </Text>
               </View>
             </TouchableOpacity>
-          </View>
+          </View> */}
           <Text style={styles.price_text}></Text>
           <View style={styles.button_holder}>
             {
-              order?.departure?.address && order?.arrival?.address ? (
-                <Button
-                  projectType="primary"
-                  style={{
-                    ...(Platform.OS === "android" && {
-                      marginBottom: 30,
-                    }), // Присваиваем marginBottom только на Android
-                  }}
-                  onPress={() => handleCreateOrder()}
-                  disabled={status === MainStatusEnum.CREATING_ORDER}
-                >
-                  <View
-                    style={[
-                      styles.primary_button_text,
-                      styles.centerLine,
-                    ]}
+              (
+                <View style={[styles.orderBlock]}>
+                  
+                  {/* {PAYMENT_METHODS[order.paymentMethod].Icon} */}
+                  <WalletIcon />
+
+                  <Button
+                    projectType="primary"
+                    style={{
+                      ...(Platform.OS === "android" && {
+                        width: '70%'
+                      }), // Присваиваем marginBottom только на Android
+                    }}
+                    onPress={() => handleCreateOrder()}
+                    disabled={
+                      status === MainStatusEnum.CREATING_ORDER && 
+                      !!order?.departure?.address && !!order?.arrival?.address
+                    }
                   >
-                    <Text style={{color: colors.black}}>Заказать авто</Text>
-                    <View style={styles.button_holder2}>
-                      <Text style={{color: colors.black}}>
+                    <View
+                      style={[
+                        styles.primary_button_text,
+                        styles.centerLine,
+                      ]}
+                    >
+                      {/* <VectorIcon /> */}
+                      <Text style={{ color: colors.black, marginLeft: 5, fontSize: 16, fontWeight: '500' }}>
+                        Заказать авто
                         {" "}
-                        {price !== null &&
-                          price !== undefined &&
-                          `${price}р`}
+                          {price !== null &&
+                            price !== undefined &&
+                            `${price}р`}
                       </Text>
+                      {/* <View style={styles.button_holder2}>
+                        <Text style={{ color: colors.black }}>
+                          {" "}
+                          {price !== null &&
+                            price !== undefined &&
+                            `${price}р`}
+                        </Text>
+                      </View> */}
                     </View>
-                  </View>
-                </Button>
-              ) : null
+                  </Button>
+                  
+                  <DetailsIcon />
+
+                </View>
+              )
             }
           </View>
         </View>
@@ -554,7 +638,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   address_input_text: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.opacity,
     flexGrow: 1,
     width: "80%",
@@ -567,7 +651,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   date_input_text: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.opacity,
     flexGrow: 1,
   },
@@ -603,13 +687,13 @@ const styles = StyleSheet.create({
     color: colors.white,
     textAlign: "center",
   },
-  details: {
-    borderTopColor: colors.stroke,
-    borderBottomColor: colors.stroke,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    flexDirection: "row",
-  },
+  // details: {
+  //   borderTopColor: colors.stroke,
+  //   borderBottomColor: colors.stroke,
+  //   borderTopWidth: 1,
+  //   borderBottomWidth: 1,
+  //   flexDirection: "row",
+  // },
   payment_block: {
     width: "50%",
     borderRightColor: colors.stroke,
@@ -650,6 +734,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
     paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderColor: '#2F2F2F',
+    height: 10,
+    marginBottom: 20,
   },
   button_holder: {
     flexDirection: "row",
@@ -666,9 +754,9 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
   button_holder3: {
-    position: "absolute",
-    right: -80,
-    fontSize: 16,
+    // position: "absolute",
+    // right: -80,
+    // fontSize: 16,
   },
   primary_button_text: {
     color: colors.black,
@@ -686,15 +774,48 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
   },
+  dateButtonWrapper: {
+    borderRadius: 25,
+    width: '50%',
+    display: 'flex',
+    justifyContent: 'center',
+    columnGap: 5,
+    padding: 5,
+    marginBottom: 10
+  },
+  dateBLock: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  dateText1: {
+    fontSize: 14,
+    color: 'white',
+    borderRightWidth: 1,
+    borderRightColor: 'white',
+    paddingRight: 4,
+  },
+  dateText2: {
+    fontSize: 14,
+    color: 'white',
+  },
   centerLine: {
-    width: "50%",
-    borderRightColor: colors.stroke,
-    borderRightWidth: 2,
+    // width: "50%",
+    // borderRightColor: colors.stroke,
+    // borderRightWidth: 2,
   },
   centerLine2: {
-    width: "40%",
-    borderRightColor: colors.stroke,
-    borderRightWidth: 2,
+    // display: 'flex',
+    // width: '100%'
+    // width: "50%",
+    // borderRightColor: colors.stroke,
+    // borderRightWidth: 2,
+  },
+  orderBlock: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 30,
   },
   secondary_button_text: {
     color: colors.white,

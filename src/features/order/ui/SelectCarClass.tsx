@@ -6,15 +6,16 @@ import { colors } from "src/shared/style";
 type Props = {
     selectCarClass: (index: number) => void;
     activeCarClassIndex: number;
+    endPrice: number
 }
 
-const SelectCarClass: FC<Props> = function({selectCarClass, activeCarClassIndex}) {
+const SelectCarClass: FC<Props> = function({selectCarClass, activeCarClassIndex, endPrice}) {
     return(
         <View style={{rowGap: 5}}>
             <Text style={styles.title}>Класс авто</Text>
             <ScrollView style={styles.container} contentContainerStyle={styles.content_container} horizontal>
                 {
-                    CARS_CLASSES.map(({label, img}, index) => (
+                    CARS_CLASSES.map(({label, img, price}, index) => (
                         <TouchableOpacity 
                             key={index}
                             style={[styles.button, activeCarClassIndex === index && styles.active_button]}
@@ -24,6 +25,11 @@ const SelectCarClass: FC<Props> = function({selectCarClass, activeCarClassIndex}
 
                             </View>
                             <Text style={styles.label}>{label}</Text>
+                            {activeCarClassIndex === index ? 
+                                <Text style={styles.label}>{endPrice} p</Text>
+                                :
+                                <Text style={styles.label}>{endPrice} p</Text>
+                            }
                         </TouchableOpacity>
                     ))
                 }
@@ -58,6 +64,7 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 6,
         paddingHorizontal: 10,
+        paddingBottom: 2,
         paddingTop: 15,
         borderWidth: 1,
         borderColor: colors.transparent

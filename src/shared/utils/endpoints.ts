@@ -1,4 +1,4 @@
-const baseUrl = "http://5.35.89.71:3001";
+const baseUrl = "http://31.128.36.217:3001";
 
 export const Endpoints = {
     uploadFiles: baseUrl + '/users/upload',
@@ -12,4 +12,5 @@ export const Endpoints = {
     updateFcmToken: baseUrl + '/users/drivers/token',
     getTrips : baseUrl + '/order/client',
     deleteOrder: baseUrl + '/order/delete',
+    getLatestVersion: baseUrl + '/api/version',
 }
