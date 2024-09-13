@@ -85,8 +85,8 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
     const points =
       BOTTOM_SHEET_SNAP_POINTS[BottomSheetStateEnum.SET_ADDRESS];
 
-    setBottomSheetSnapPoint(BottomSheetStateEnum.SET_ADDRESS, [390, 480]);
-    snapToPosition(390);
+    setBottomSheetSnapPoint(BottomSheetStateEnum.SET_ADDRESS, [415, 480]);
+    snapToPosition(415);
 
     if (
       order.departure.city &&
@@ -97,7 +97,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
       getBottomSheetSnapPoints();
       setBottomSheetSnapPoint(
         BottomSheetStateEnum.SET_ADDRESS,
-        [390, 480]
+        [415, 480]
       );
 
       snapToPosition(480);
@@ -119,7 +119,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
   ]);
 
   useEffect(() => {
-    setBottomSheetSnapPoint(BottomSheetStateEnum.SET_ADDRESS, [390, 480]);
+    setBottomSheetSnapPoint(BottomSheetStateEnum.SET_ADDRESS, [415, 480]);
   }, [
     order.departure.city,
     order.departure.address,
@@ -502,6 +502,7 @@ const OrderMenu: FC<Props> = function ({setBottomSheetState}) {
                 <Text style={[styles.dateText1]}>
                   {dayjs(order.date).format("DD.MM.YYYY")}
                 </Text>
+                <View style={styles.line}></View>
                 <Text style={[styles.dateText2]}>
                   {" "}
                   {dayjs(order.date).format("HH:mm")}
@@ -790,9 +791,15 @@ const styles = StyleSheet.create({
   dateText1: {
     fontSize: 14,
     color: 'white',
+    // borderRightWidth: 1,
+    // borderRightColor: 'white',
+    // paddingRight: 4,
+  },
+  line: {
     borderRightWidth: 1,
     borderRightColor: 'white',
-    paddingRight: 4,
+    width: 20,
+    backgroundColor: 'red'
   },
   dateText2: {
     fontSize: 14,

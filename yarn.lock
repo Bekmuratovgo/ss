@@ -1109,7 +1109,7 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
-"@bam.tech/react-native-image-resizer@^3.0.7":
+"@bam.tech/react-native-image-resizer@^3.0.10":
   version "3.0.10"
   resolved "https://registry.npmjs.org/@bam.tech/react-native-image-resizer/-/react-native-image-resizer-3.0.10.tgz"
   integrity sha512-IVIBRkgy8eq4g51RjAzh7zk8KpGhiQH6GqLC7SgAUJ0plh2bdqG2l8+D+Q/A0uFe85YutUmHyFioyDEsRGXaCQ==
@@ -6673,6 +6673,11 @@ react-native-webview@^13.6.2:
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
+
+react-native-yamap@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.npmjs.org/react-native-yamap/-/react-native-yamap-4.6.1.tgz"
+  integrity sha512-LNNcdjbkSSqHESiU5ozSf+QZhErRzAnH6gONy3xZSg/EP9UNMrscp6a335ecvDxrXZgQ6mvWWw8tfC7SZ4AZoA==
 
 react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@> 0.50.0", "react-native@>= 0.62", "react-native@>= 0.64.3", react-native@>=0.33, react-native@>=0.42.0, react-native@>=0.46, react-native@>=0.48.4, react-native@>=0.58.4, react-native@>=0.59.0, react-native@>=0.60.0, react-native@>=0.63.2, react-native@>=0.70.0, react-native@0.72.3:
   version "0.72.3"

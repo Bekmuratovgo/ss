@@ -11,7 +11,7 @@
         "test": "jest"
     },
     "dependencies": {
-        "@bam.tech/react-native-image-resizer": "^3.0.7",
+        "@bam.tech/react-native-image-resizer": "^3.0.10",
         "@gorhom/bottom-sheet": "^4.5.1",
         "@notifee/react-native": "^7.8.2",
         "@pbe/react-yandex-maps": "^1.2.5",
@@ -60,6 +60,7 @@
         "react-native-tab-view": "^3.5.2",
         "react-native-toast-notifications": "3.3.1",
         "react-native-webview": "^13.6.2",
+        "react-native-yamap": "^4.6.1",
         "socket.io-client": "^4.7.3"
     },
     "devDependencies": {

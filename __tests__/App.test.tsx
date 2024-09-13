@@ -5,6 +5,9 @@
 import 'react-native';
 import React from 'react';
 import App from '../App';
+import { YaMap, Marker } from 'react-native-yamap';
+
+YaMap.init('68d5aecf-911e-44d1-a833-f50832c1f69a');
 
 // Note: import explicitly to use the types shiped with jest.
 import {it} from '@jest/globals';
