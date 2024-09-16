@@ -5,7 +5,7 @@ export let BOTTOM_SHEET_SNAP_POINTS = {
     [BottomSheetStateEnum.LOADING]: Platform.OS === "ios" ? [653] : [653],
     [BottomSheetStateEnum.ORDER_DETAIL]: Platform.OS === "ios" ? [560] : [623],
     [BottomSheetStateEnum.ENABLE_GPS]: Platform.OS === "ios" ? [440] : [440],
-    [BottomSheetStateEnum.SET_ADDRESS]: Platform.OS === "ios" ? [390,390] : [400,500],
+    [BottomSheetStateEnum.SET_ADDRESS]: Platform.OS === "ios" ? [390,390] : [440,500],
     [BottomSheetStateEnum.DEFINED_PAYMENT_METHOD]: Platform.OS === "ios" ? [225] : [225],
     [BottomSheetStateEnum.SET_DEPARTURE_LOCATION]: Platform.OS === "ios" ? [325] : [325],
     [BottomSheetStateEnum.SET_DEPARTURE_CITY]: Platform.OS === "ios" ? ['20%'] : ['25%'],

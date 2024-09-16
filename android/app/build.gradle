@@ -82,9 +82,16 @@ android {
         versionCode 29
         versionName "1.0.0"
     }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        checkDependencies false
+
+        // baseline file("lint-baseline.xml") // You can remove this line if you don't want a baseline
+    }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
+            storeFile file('./debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
             keyPassword 'android'

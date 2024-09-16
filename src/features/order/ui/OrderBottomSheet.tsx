@@ -23,7 +23,7 @@ const OrderBottomSheet = function({bottomSheetState, setBottomSheetState}: Order
         <BottomSheet
             ref={sheetModalRef}
             index={0}
-            snapPoints={snapPoints}
+            snapPoints={[440]}
             keyboardBlurBehavior="restore"
             android_keyboardInputMode="adjustResize"
             backgroundStyle={styles.bottomSheetBackground}

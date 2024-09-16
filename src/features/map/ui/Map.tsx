@@ -21,6 +21,8 @@ import {
     setMyLocationTrigger as triggerMyPosition,
 } from "src/features/gps";
 import { getGeocode } from "../model/map-actions";
+// import MapComponent from "./YandexMap";
+import YaMap from "react-native-yamap";
 
 
 export type MapProps = {
@@ -199,7 +201,7 @@ function Map({bottomSheetState}: MapProps) {
 
     return (
       <View style={styles.container}>
-        <WebView
+        {/* <WebView
             ref={(c) => (this._webView = c)}
             source={{ html: require("./MapRenderer") }}
             allowFileAccess={true}
@@ -207,6 +209,14 @@ function Map({bottomSheetState}: MapProps) {
             allowUniversalAccessFromFileURLs
             allowsProtectedMedia
             onMessage={handleMessage}
+        /> */}
+        <YaMap 
+          style={{width: '100%', height: '100%'}}
+          // initialRegion={{
+          //   lat: 55.751244,
+          //   lon: 37.618423,
+          //   zoom: 10,
+          // }}
         />
       </View>
     );

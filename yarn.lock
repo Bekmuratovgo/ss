@@ -6674,6 +6674,11 @@ react-native-webview@^13.6.2:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
+react-native-yamap@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.npmjs.org/react-native-yamap/-/react-native-yamap-4.6.1.tgz"
+  integrity sha512-LNNcdjbkSSqHESiU5ozSf+QZhErRzAnH6gONy3xZSg/EP9UNMrscp6a335ecvDxrXZgQ6mvWWw8tfC7SZ4AZoA==
+
 react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", "react-native@> 0.50.0", "react-native@>= 0.62", "react-native@>= 0.64.3", react-native@>=0.33, react-native@>=0.42.0, react-native@>=0.46, react-native@>=0.48.4, react-native@>=0.58.4, react-native@>=0.59.0, react-native@>=0.60.0, react-native@>=0.63.2, react-native@>=0.70.0, react-native@0.72.3:
   version "0.72.3"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.72.3.tgz"
